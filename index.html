@@ -5,77 +5,162 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SKAY Clan App</title>
     
-    <!-- PWA Налаштування -->
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#0f0f12">
     <link rel="apple-touch-icon" href="icon.png">
 
     <style>
+        * {
+            box-sizing: border-box;
+        }
         body {
             background-color: #0f0f12;
             color: #ffffff;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
             min-height: 100vh;
             margin: 0;
             padding: 20px;
-            box-sizing: border-box;
-            text-align: center;
         }
-        .card {
+        .container {
+            max-width: 450px;
+            width: 100%;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .header img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 2px solid #4e73df;
+            box-shadow: 0 0 15px rgba(78, 115, 223, 0.4);
+        }
+        .header h1 {
+            color: #ffffff;
+            margin: 10px 0 4px 0;
+            font-size: 22px;
+            letter-spacing: 1px;
+        }
+        .header p {
+            color: #a0a0b8;
+            font-size: 12px;
+            margin: 0;
+        }
+        .section-title {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #4e73df;
+            margin: 16px 0 8px 4px;
+            font-weight: bold;
+        }
+        .menu-grid {
+            display: grid;
+            gap: 10px;
+        }
+        .menu-card {
             background: #1a1a24;
             border: 1px solid #2b2b3d;
-            border-radius: 16px;
-            padding: 24px;
-            max-width: 400px;
-            width: 100%;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
-        }
-        h1 {
-            color: #4e73df;
-            margin-bottom: 10px;
-        }
-        p {
-            color: #a0a0b8;
-            font-size: 14px;
-            line-height: 1.5;
-        }
-        .btn {
-            display: inline-block;
-            background: #4e73df;
-            color: white;
-            padding: 12px 24px;
-            border-radius: 8px;
+            border-radius: 12px;
+            padding: 14px;
+            display: flex;
+            align-items: center;
             text-decoration: none;
-            font-weight: bold;
-            margin-top: 15px;
-            transition: 0.2s;
-            border: none;
-            cursor: pointer;
+            color: #ffffff;
+            transition: all 0.2s ease;
         }
-        .btn:hover {
-            background: #375a7f;
+        .menu-card:hover {
+            border-color: #4e73df;
+            background: #222230;
+            transform: translateY(-2px);
+        }
+        .icon-box {
+            width: 40px;
+            height: 40px;
+            background: rgba(78, 115, 223, 0.15);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+        .card-text h3 {
+            margin: 0 0 2px 0;
+            font-size: 15px;
+            color: #ffffff;
+        }
+        .card-text p {
+            margin: 0;
+            font-size: 11px;
+            color: #8a8a9e;
         }
     </style>
 </head>
 <body>
 
-    <div class="card">
-        <h1>SKAY CLAN</h1>
-        <p>Вітаємо у офіційному додатку клану!</p>
-        <p>Ця платформа працює як повноцінний PWA-додаток на твоєму пристрої.</p>
-        <button class="btn" onclick="alert('Додаток успішно працює!')">Увійти / Меню</button>
+    <div class="container">
+        <div class="header">
+            <img src="icon.png" alt="SKAY Logo">
+            <h1>SKAY CLAN</h1>
+            <p>Панель управління кланом UKRAINE GTA</p>
+        </div>
+
+        <div class="section-title">Основні розділи</div>
+        <div class="menu-grid">
+            
+            <a href="https://docs.google.com/spreadsheets/d/1l8z1hcHlO-36uzd2pbDVzEZRY4NH15H9Ox37Ut2KVLM/edit?gid=2013017832#gid=2013017832" target="_blank" class="menu-card">
+                <div class="icon-box">💰</div>
+                <div class="card-text">
+                    <h3>Зарплата та штрафи</h3>
+                    <p>Облік виплат, догани та норми учасників</p>
+                </div>
+            </a>
+
+            <a href="https://docs.google.com/spreadsheets/d/1l8z1hcHlO-36uzd2pbDVzEZRY4NH15H9Ox37Ut2KVLM/edit?gid=318040629#gid=318040629" target="_blank" class="menu-card">
+                <div class="icon-box">📦</div>
+                <div class="card-text">
+                    <h3>Журнал здачі</h3>
+                    <p>Здані ресурси, петрушка та алкоголь</p>
+                </div>
+            </a>
+
+            <a href="https://docs.google.com/spreadsheets/d/1l8z1hcHlO-36uzd2pbDVzEZRY4NH15H9Ox37Ut2KVLM/edit?gid=1667343570#gid=1667343570" target="_blank" class="menu-card">
+                <div class="icon-box">⚔️</div>
+                <div class="card-text">
+                    <h3>Видача зброї</h3>
+                    <p>Видача M4, броні та інвентаризація</p>
+                </div>
+            </a>
+
+            <a href="https://docs.google.com/spreadsheets/d/1l8z1hcHlO-36uzd2pbDVzEZRY4NH15H9Ox37Ut2KVLM/edit?gid=293786053#gid=293786053" target="_blank" class="menu-card">
+                <div class="icon-box">⏳</div>
+                <div class="card-text">
+                    <h3>Бронювання цехів</h3>
+                    <p>Статус броні та час роботи цехів</p>
+                </div>
+            </a>
+
+            <a href="https://docs.google.com/spreadsheets/d/1l8z1hcHlO-36uzd2pbDVzEZRY4NH15H9Ox37Ut2KVLM/edit?gid=1685199536#gid=1685199536" target="_blank" class="menu-card">
+                <div class="icon-box">📋</div>
+                <div class="card-text">
+                    <h3>Заявки в клан</h3>
+                    <p>Перегляд анкет та статус прийому</p>
+                </div>
+            </a>
+
+        </div>
     </div>
 
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('./sw.js')
-                    .then(reg => console.log('SW Registered!', reg))
-                    .catch(err => console.log('SW Error:', err));
+                navigator.serviceWorker.register('./sw.js');
             });
         }
     </script>
