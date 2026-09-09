@@ -3,474 +3,319 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SKAY Control Panel</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+  <title>SKAY Clan — Портал</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-main: #090c10;
-      --panel-bg: rgba(15, 20, 29, 0.85);
-      --card-bg: #131924;
-      --input-bg: #1a2231;
-      --border: rgba(255, 255, 255, 0.08);
-      --accent: #0088ff;
-      --accent-glow: rgba(0, 136, 255, 0.35);
-      --green: #10b981;
-      --red: #ef4444;
-      --text: #f3f4f6;
-      --text-dim: #8b949e;
+      --bg-color: #0b0d12;
+      --card-bg: #121620;
+      --inner-card: #181d2a;
+      --border-color: rgba(255, 255, 255, 0.07);
+      --accent-blue: #3b82f6;
+      --accent-blue-hover: #2563eb;
+      --accent-dark: #1e293b;
+      --accent-red-dark: #2d191e;
+      --accent-red-text: #f87171;
+      --text-main: #ffffff;
+      --text-sub: #94a3b8;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Rajdhani', sans-serif; }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
 
     body {
-      background-color: var(--bg-main);
-      background-image: 
-        radial-gradient(circle at 50% 0%, rgba(0, 136, 255, 0.15) 0%, transparent 60%),
-        linear-gradient(180deg, rgba(0,0,0,0.6) 0%, rgba(9,12,16,1) 100%);
-      color: var(--text);
+      background-color: var(--bg-color);
+      color: var(--text-main);
       min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .portal-card {
+      width: 100%;
+      max-width: 500px;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 28px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 30px 20px;
     }
 
-    /* Верхній Header */
-    .app-header {
-      width: 100%;
-      max-width: 900px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 24px;
-      padding: 0 8px;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .brand-logo {
-      width: 38px;
-      height: 38px;
-      background: linear-gradient(135deg, var(--accent), #0044ff);
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Orbitron', sans-serif;
-      font-weight: 800;
-      font-size: 18px;
-      color: #fff;
-      box-shadow: 0 0 15px var(--accent-glow);
-    }
-
-    .brand-title {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 20px;
-      font-weight: 800;
-      letter-spacing: 2px;
-      background: linear-gradient(90deg, #fff, var(--accent));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .status-badge {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 13px;
-      color: var(--text-dim);
-      background: rgba(255,255,255,0.04);
-      padding: 6px 14px;
-      border-radius: 20px;
-      border: 1px solid var(--border);
-    }
-
-    .status-dot {
-      width: 8px;
-      height: 8px;
-      background: var(--green);
+    /* Логотип та заголовок */
+    .avatar-wrap {
+      width: 90px;
+      height: 90px;
       border-radius: 50%;
-      box-shadow: 0 0 8px var(--green);
+      background: #000;
+      padding: 3px;
+      border: 2px solid var(--accent-blue);
+      box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+      margin-bottom: 12px;
+      overflow: hidden;
     }
 
-    /* Головне Меню */
-    .nav-bar {
+    .avatar-wrap img {
       width: 100%;
-      max-width: 900px;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-bottom: 24px;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
     }
 
-    .nav-btn {
-      padding: 14px 20px;
-      background: var(--panel-bg);
-      border: 1px solid var(--border);
+    .portal-header { text-align: center; margin-bottom: 24px; }
+    .portal-header h1 { font-size: 22px; font-weight: 800; letter-spacing: 0.5px; }
+    .portal-header p { font-size: 13px; color: var(--text-sub); margin-top: 4px; }
+
+    /* Блоки контенту */
+    .section-box {
+      width: 100%;
+      background: var(--inner-card);
+      border: 1px solid var(--border-color);
       border-radius: 12px;
-      color: var(--text-dim);
-      font-size: 16px;
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+
+    .section-box h3 {
+      font-size: 12px;
       font-weight: 700;
-      letter-spacing: 1px;
+      color: var(--accent-blue);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 8px;
+    }
+
+    .section-box p {
+      font-size: 13px;
+      color: var(--text-sub);
+      line-height: 1.5;
+    }
+
+    /* Сітка керівництва */
+    .leaders-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .leader-item {
+      background: rgba(0, 0, 0, 0.2);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 10px;
+    }
+
+    .leader-name { font-size: 13px; font-weight: 700; color: #fff; }
+    .leader-role { font-size: 12px; color: var(--accent-blue); margin-top: 2px; }
+
+    /* Кнопки меню */
+    .menu-buttons {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .btn-main {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 600;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
-      transition: all 0.25s ease;
-      backdrop-filter: blur(10px);
+      gap: 8px;
+      transition: all 0.2s ease;
     }
 
-    .nav-btn:hover {
-      border-color: rgba(0, 136, 255, 0.4);
+    .btn-blue {
+      background: var(--accent-blue);
       color: #fff;
-      transform: translateY(-2px);
     }
+    .btn-blue:hover { background: var(--accent-blue-hover); }
 
-    .nav-btn.active {
-      background: linear-gradient(135deg, rgba(0,136,255,0.2) 0%, rgba(0,136,255,0.05) 100%);
-      border-color: var(--accent);
+    .btn-dark {
+      background: var(--accent-dark);
       color: #fff;
-      box-shadow: 0 4px 20px var(--accent-glow);
+      border: 1px solid var(--border-color);
     }
+    .btn-dark:hover { background: #283548; }
 
-    /* Основний Панельний Контейнер */
-    .main-panel {
-      width: 100%;
-      max-width: 900px;
-      background: var(--panel-bg);
-      backdrop-filter: blur(16px);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 32px;
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+    .btn-red-dark {
+      background: var(--accent-red-dark);
+      color: var(--accent-red-text);
+      border: 1px solid rgba(248, 113, 113, 0.2);
     }
+    .btn-red-dark:hover { background: #3a2027; }
 
-    .tab { display: none; }
-    .tab.active { display: block; animation: tabFade 0.3s ease; }
-
-    @keyframes tabFade {
-      from { opacity: 0; transform: translateY(8px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .section-title {
-      font-size: 20px;
-      font-weight: 700;
-      letter-spacing: 1px;
-      margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      color: #fff;
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 12px;
-    }
-
-    /* Форми та Спланована Сітка */
-    .form-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
-    }
-
-    .grid-3 { grid-template-columns: repeat(3, 1fr); }
-    .full { grid-column: span 2; }
-    .full-3 { grid-column: span 3; }
-
-    .input-group {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .input-group label {
-      font-size: 13px;
+    /* Екрани вкладок / Модалки */
+    .view-screen { display: none; width: 100%; }
+    .view-screen.active { display: block; }
+    .back-btn {
+      background: transparent;
+      border: none;
+      color: var(--accent-blue);
       font-weight: 600;
-      color: var(--text-dim);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
+      font-size: 13px;
+      cursor: pointer;
+      margin-bottom: 16px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
     }
 
     input, select {
       width: 100%;
-      padding: 12px 16px;
-      background: var(--input-bg);
-      border: 1px solid var(--border);
+      padding: 10px 12px;
+      background: #0d1017;
+      border: 1px solid var(--border-color);
       border-radius: 8px;
       color: #fff;
-      font-size: 15px;
-      font-weight: 600;
+      font-size: 13px;
+      margin-bottom: 10px;
       outline: none;
-      transition: all 0.2s ease;
     }
-
-    input:focus, select:focus {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 3px var(--accent-glow);
-    }
-
-    /* Кнопки Дій */
-    .btn-row {
-      display: flex;
-      justify-content: flex-end;
-      margin-top: 12px;
-    }
-
-    .btn {
-      padding: 12px 28px;
-      border: none;
-      border-radius: 8px;
-      font-size: 15px;
-      font-weight: 700;
-      letter-spacing: 1px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-    }
-
-    .btn-accent {
-      background: var(--accent);
-      color: #fff;
-      box-shadow: 0 4px 15px var(--accent-glow);
-    }
-
-    .btn-accent:hover { background: #0077e6; transform: translateY(-1px); }
-
-    .btn-green {
-      background: var(--green);
-      color: #fff;
-      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
-    }
-
-    .btn-green:hover { background: #0d9668; transform: translateY(-1px); }
-
-    .btn-red {
-      background: var(--red);
-      color: #fff;
-      box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
-    }
-
-    .btn-red:hover { background: #dc2626; transform: translateY(-1px); }
-
-    /* Картки Інформації в Кабінеті */
-    .stats-container {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 14px;
-      margin-top: 20px;
-    }
-
-    .stat-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .stat-card .label { font-size: 12px; color: var(--text-dim); text-transform: uppercase; font-weight: 600; }
-    .stat-card .value { font-size: 18px; font-weight: 700; color: #fff; }
-
-    @media (max-width: 768px) {
-      .form-grid, .grid-3, .stats-container { grid-template-columns: 1fr; }
-      .full, .full-3 { grid-column: span 1; }
-      .nav-bar { grid-template-columns: 1fr; }
-    }
+    input:focus { border-color: var(--accent-blue); }
   </style>
 </head>
 <body>
 
-  <!-- Header -->
-  <header class="app-header">
-    <div class="brand">
-      <div class="brand-logo">S</div>
-      <div class="brand-title">SKAY CONTROL</div>
-    </div>
-    <div class="status-badge">
-      <span class="status-dot"></span> Система активна
-    </div>
-  </header>
+<div class="portal-card">
 
-  <!-- Навігація -->
-  <nav class="nav-bar">
-    <button class="nav-btn active" onclick="switchTab('apply', event)">📝 Заявка</button>
-    <button class="nav-btn" onclick="switchTab('cabinet', event)">🔑 Кабінет</button>
-    <button class="nav-btn" onclick="switchTab('admin', event)">💼 Керівництво</button>
-  </nav>
-
-  <!-- Основна панель -->
-  <main class="main-panel">
-
-    <!-- Вкладка 1: Подача заявки -->
-    <div id="apply" class="tab active">
-      <div class="section-title">📝 Подати заявку на вступ</div>
-      <div class="form-grid">
-        <div class="input-group">
-          <label>Ігровий Нікнейм</label>
-          <input type="text" id="app_nick" placeholder="Наприклад: Alex_Foma">
-        </div>
-        <div class="input-group">
-          <label>День народження</label>
-          <input type="text" id="app_bday" placeholder="ДД.ММ">
-        </div>
-        <div class="input-group">
-          <label>Останні 6 цифр картки</label>
-          <input type="text" id="app_card" placeholder="123456">
-        </div>
-        <div class="input-group">
-          <label>Ігровий ID</label>
-          <input type="text" id="app_id" placeholder="172258">
-        </div>
-        <div class="input-group">
-          <label>Discord User/ID</label>
-          <input type="text" id="app_discord" placeholder="username#0000">
-        </div>
-        <div class="input-group">
-          <label>Ваш вік</label>
-          <input type="number" id="app_age" placeholder="18">
-        </div>
-        <div class="input-group">
-          <label>Онлайн у грі</label>
-          <input type="text" id="app_time" placeholder="3-4 години">
-        </div>
-        <div class="input-group">
-          <label>Знання РП (1-10)</label>
-          <input type="number" id="app_rp" placeholder="10">
-        </div>
-        <div class="input-group">
-          <label>Прокачка M4A4 (%)</label>
-          <input type="text" id="app_m4" placeholder="100%">
-        </div>
-        <div class="input-group">
-          <label>Хто запросив</label>
-          <input type="text" id="app_inviter" placeholder="Нікнейм">
-        </div>
+  <!-- ГОЛОВНА СТОРІНКА ПОРТАЛУ -->
+  <div id="home_view" class="view-screen active">
+    <div style="display: flex; flex-direction: column; align-items: center;">
+      <div class="avatar-wrap">
+        <!-- Замініть logo.png на пряме посилання на ваш логотип SKAY -->
+        <img src="https://via.placeholder.com/90/000000/ffffff?text=SKAY" alt="SKAY Logo">
       </div>
-      <div class="btn-row">
-        <button class="btn btn-accent" onclick="submitApplication()">Надіслати заявку</button>
+      <div class="portal-header">
+        <h1>SKAY CLAN</h1>
+        <p>Офіційний портал клану UKRAINE GTA</p>
       </div>
     </div>
 
-    <!-- Вкладка 2: Особистий кабінет -->
-    <div id="cabinet" class="tab">
-      <div class="section-title">🔑 Авторизація сокланівця</div>
-      <div class="form-grid">
-        <div class="input-group full">
-          <label>Номер картки (6 цифр)</label>
-          <input type="text" id="user_card" placeholder="Введіть 6 цифр вашої картки">
-        </div>
-      </div>
-      <div class="btn-row">
-        <button class="btn btn-accent" onclick="loginUser()">Увійти в кабінет</button>
-      </div>
+    <div class="section-box">
+      <h3>ПРО НАШ КЛАН</h3>
+      <p>SKAY — це топовий та згуртований клан. Ми займаємося активним розвитку підприємств, вирощуванням ресурсів, виготовленням зброї та RP-життям.</p>
+    </div>
 
-      <div id="cabinet_info" class="stats-container" style="display:none;">
-        <div class="stat-card">
-          <span class="label">Нікнейм</span>
-          <span class="value" id="res_nick">-</span>
+    <div class="section-box">
+      <h3>КЕРІВНИЦТВО КЛАНУ</h3>
+      <div class="leaders-grid">
+        <div class="leader-item">
+          <div class="leader-name">Алекс Фома</div>
+          <div class="leader-role">Лідер клану</div>
         </div>
-        <div class="stat-card">
-          <span class="label">Ранг</span>
-          <span class="value" id="res_rank">-</span>
+        <div class="leader-item">
+          <div class="leader-name">Дініс Мельник</div>
+          <div class="leader-role">Модератор</div>
         </div>
-        <div class="stat-card">
-          <span class="label">Баланс</span>
-          <span class="value" id="res_balance" style="color:var(--green);">-</span>
+        <div class="leader-item">
+          <div class="leader-name">Петро Пишняк</div>
+          <div class="leader-role">Модератор</div>
         </div>
-        <div class="stat-card">
-          <span class="label">Штрафи / Догани</span>
-          <span class="value" id="res_reprimands" style="color:var(--red);">-</span>
+        <div class="leader-item">
+          <div class="leader-name">Дмитро Кропивний</div>
+          <div class="leader-role">Місцевий</div>
         </div>
       </div>
     </div>
 
-    <!-- Вкладка 3: Керівництво -->
-    <div id="admin" class="tab">
-      <div id="admin_login_box">
-        <div class="section-title">💼 Вхід для Керівництва</div>
-        <div class="form-grid">
-          <div class="input-group full">
-            <label>PIN-код Модератора</label>
-            <input type="password" id="admin_pin" placeholder="•••••••">
-          </div>
-        </div>
-        <div class="btn-row">
-          <button class="btn btn-accent" onclick="adminLogin()">Авторизуватись</button>
-        </div>
-      </div>
+    <div class="menu-buttons">
+      <button class="btn-main btn-blue" onclick="openView('apply_view')">📝 Подати заявку в клан</button>
+      <button class="btn-main btn-dark" onclick="openView('cabinet_view')">🔑 Авторизація в Мій кабінет</button>
+      <button class="btn-main btn-red-dark" onclick="openView('admin_view')">👑 Кабінет керівництва</button>
+    </div>
+  </div>
 
-      <div id="admin_panel" style="display:none;">
-        <div class="section-title">💼 Панель Керівника: <span id="admin_name_disp" style="color:var(--accent); margin-left:8px;"></span></div>
-        
-        <p style="color:var(--text-dim); margin-bottom:12px; font-weight:600;">📦 ПРИЙОМ ПРОДУКЦІЇ</p>
-        <div class="form-grid grid-3">
-          <div class="input-group full-3">
-            <label>Тип продукції</label>
-            <select id="prod_type"><option>Петрушка</option><option>Алкоголь</option></select>
-          </div>
-          <div class="input-group full-3">
-            <label>ID сокланівця</label>
-            <input type="text" id="prod_member_id" placeholder="172258">
-          </div>
-          <div class="input-group"><label>1⭐ Кількість</label><input type="number" id="qty1" placeholder="0"></div>
-          <div class="input-group"><label>2⭐ Кількість</label><input type="number" id="qty2" placeholder="0"></div>
-          <div class="input-group"><label>3⭐ Кількість</label><input type="number" id="qty3" placeholder="0"></div>
-        </div>
-        <div class="btn-row">
-          <button class="btn btn-green" onclick="sendProduct()">Прийняти товар</button>
-        </div>
+  <!-- ФОРМА ЗАЯВКИ -->
+  <div id="apply_view" class="view-screen">
+    <button class="back-btn" onclick="openView('home_view')">← Повернутися назад</button>
+    <div class="section-box">
+      <h3>ПОДАТИ ЗАЯВКУ НА ВСТУП</h3>
+      <input type="text" id="app_nick" placeholder="Ігровий Нікнейм">
+      <input type="text" id="app_bday" placeholder="День народження (ДД.ММ)">
+      <input type="text" id="app_card" placeholder="Останні 6 цифр картки">
+      <input type="text" id="app_id" placeholder="Ігровий ID">
+      <input type="text" id="app_discord" placeholder="Discord User/ID">
+      <input type="number" id="app_age" placeholder="Ваш вік">
+      <input type="text" id="app_time" placeholder="Онлайн у грі (год)">
+      <input type="number" id="app_rp" placeholder="Знання РП (1-10)">
+      <input type="text" id="app_m4" placeholder="Прокачка M4A4 (%)">
+      <input type="text" id="app_inviter" placeholder="Хто запросив">
+      <button class="btn-main btn-blue" style="margin-top:10px;" onclick="submitApplication()">Надіслати заявку</button>
+    </div>
+  </div>
 
-        <div style="border-top:1px solid var(--border); margin: 28px 0;"></div>
-
-        <p style="color:var(--text-dim); margin-bottom:12px; font-weight:600;">🔫 ВИДАЧА ЗБРОЇ СКАЛАДУ</p>
-        <div class="form-grid">
-          <div class="input-group">
-            <label>Нікнейм сокланівця</label>
-            <input type="text" id="w_nick" placeholder="Alex_Foma">
-          </div>
-          <div class="input-group">
-            <label>Ранг</label>
-            <select id="w_rank">
-              <option>Молодший</option><option>Місцевий</option>
-              <option>Старший</option><option>Модератор</option><option>Лідер</option>
-            </select>
-          </div>
-          <div class="input-group">
-            <label>Кількість M4 (0 = за нормою)</label>
-            <input type="number" id="w_m4" placeholder="0">
-          </div>
-          <div class="input-group">
-            <label>Кількість Броні (0 = за нормою)</label>
-            <input type="number" id="w_armor" placeholder="0">
-          </div>
-        </div>
-        <div class="btn-row">
-          <button class="btn btn-red" onclick="giveWeapon()">Видати зі списанням</button>
-        </div>
-      </div>
+  <!-- ОСОБИСТИЙ КАБІНЕТ -->
+  <div id="cabinet_view" class="view-screen">
+    <button class="back-btn" onclick="openView('home_view')">← Повернутися назад</button>
+    <div class="section-box">
+      <h3>АВТОРИЗАЦІЯ СОКЛАНІВЦЯ</h3>
+      <input type="text" id="user_card" placeholder="Введіть 6 цифр вашої картки">
+      <button class="btn-main btn-blue" onclick="loginUser()">Увійти в кабінет</button>
     </div>
 
-  </main>
+    <div id="cabinet_info" class="section-box" style="display:none;">
+      <h3>ІНФОРМАЦІЯ</h3>
+      <p><b>Нік:</b> <span id="res_nick">-</span></p>
+      <p><b>Ранг:</b> <span id="res_rank">-</span></p>
+      <p><b>Баланс:</b> <span id="res_balance">-</span></p>
+      <p><b>Штрафи/Догани:</b> <span id="res_reprimands">-</span></p>
+    </div>
+  </div>
+
+  <!-- КАБІНЕТ КЕРІВНИЦТВА -->
+  <div id="admin_view" class="view-screen">
+    <button class="back-btn" onclick="openView('home_view')">← Повернутися назад</button>
+    <div id="admin_login_box" class="section-box">
+      <h3>ВХІД ДЛЯ КЕРІВНИЦТВА</h3>
+      <input type="password" id="admin_pin" placeholder="Введіть PIN-код">
+      <button class="btn-main btn-blue" onclick="adminLogin()">Авторизуватись</button>
+    </div>
+
+    <div id="admin_panel" style="display:none;">
+      <div class="section-box">
+        <h3>ПРИЙОМ ПРОДУКЦІЇ (<span id="admin_name_disp"></span>)</h3>
+        <select id="prod_type"><option>Петрушка</option><option>Алкоголь</option></select>
+        <input type="text" id="prod_member_id" placeholder="ID сокланівця">
+        <input type="number" id="qty1" placeholder="1⭐ Кількість">
+        <input type="number" id="qty2" placeholder="2⭐ Кількість">
+        <input type="number" id="qty3" placeholder="3⭐ Кількість">
+        <button class="btn-main btn-blue" onclick="sendProduct()">Прийняти товар</button>
+      </div>
+
+      <div class="section-box">
+        <h3>ВИДАЧА ЗБРОЇ</h3>
+        <input type="text" id="w_nick" placeholder="Нікнейм сокланівця">
+        <select id="w_rank">
+          <option>Молодший</option><option>Місцевий</option>
+          <option>Старший</option><option>Модератор</option><option>Лідер</option>
+        </select>
+        <input type="number" id="w_m4" placeholder="M4 (0 за нормою)">
+        <input type="number" id="w_armor" placeholder="Броня (0 за нормою)">
+        <button class="btn-main btn-red-dark" onclick="giveWeapon()">Видати зі списанням</button>
+      </div>
+    </div>
+  </div>
+
+</div>
 
 <script>
   const API_URL = "https://script.google.com/macros/s/AKfycbwLy-MSdOMQnNV2g8jSd65yhdFYc05nFJa4RboxHp4ipn023LQBgkTdvS8eLDakIdhU/exec"; 
   let currentAdmin = "";
 
-  function switchTab(tabId, e) {
-    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-    document.getElementById(tabId).classList.add('active');
-    e.target.classList.add('active');
+  function openView(viewId) {
+    document.querySelectorAll('.view-screen').forEach(v => v.classList.remove('active'));
+    document.getElementById(viewId).classList.add('active');
   }
 
   async function apiCall(data) {
@@ -500,7 +345,7 @@
     const card = document.getElementById('user_card').value;
     const res = await apiCall({ action: "get_member_cabinet", card: card });
     if(res.success) {
-      document.getElementById('cabinet_info').style.display = "grid";
+      document.getElementById('cabinet_info').style.display = "block";
       document.getElementById('res_nick').innerText = res.data.nick;
       document.getElementById('res_rank').innerText = res.data.rank;
       document.getElementById('res_balance').innerText = res.data.balance + " грн.";
