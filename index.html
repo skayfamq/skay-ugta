@@ -10,7 +10,7 @@
       --bg-color: #0b0d12;
       --card-bg: #121620;
       --inner-card: #181d2a;
-      --border-color: rgba(255, 255, 255, 0.07);
+      --border-color: rgba(255, 255, 255, 0.08);
       --accent-blue: #3b82f6;
       --accent-blue-hover: #2563eb;
       --accent-dark: #1e293b;
@@ -34,48 +34,49 @@
 
     .portal-card {
       width: 100%;
-      max-width: 500px;
+      max-width: 580px;
       background: var(--card-bg);
       border: 1px solid var(--border-color);
       border-radius: 20px;
       padding: 28px;
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
       display: flex;
       flex-direction: column;
       align-items: center;
     }
 
-    /* Логотип та заголовок */
+    /* Логотип */
     .avatar-wrap {
-      width: 90px;
-      height: 90px;
+      width: 96px;
+      height: 96px;
       border-radius: 50%;
-      background: #000;
-      padding: 3px;
+      background: #0d1017;
       border: 2px solid var(--accent-blue);
-      box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+      box-shadow: 0 0 20px rgba(59, 130, 246, 0.35);
       margin-bottom: 12px;
       overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .avatar-wrap img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      border-radius: 50%;
     }
 
-    .portal-header { text-align: center; margin-bottom: 24px; }
-    .portal-header h1 { font-size: 22px; font-weight: 800; letter-spacing: 0.5px; }
+    .portal-header { text-align: center; margin-bottom: 22px; }
+    .portal-header h1 { font-size: 24px; font-weight: 800; letter-spacing: 0.5px; }
     .portal-header p { font-size: 13px; color: var(--text-sub); margin-top: 4px; }
 
-    /* Блоки контенту */
+    /* Блоки */
     .section-box {
       width: 100%;
       background: var(--inner-card);
       border: 1px solid var(--border-color);
-      border-radius: 12px;
-      padding: 16px;
+      border-radius: 14px;
+      padding: 18px;
       margin-bottom: 16px;
     }
 
@@ -85,7 +86,7 @@
       color: var(--accent-blue);
       text-transform: uppercase;
       letter-spacing: 0.8px;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
 
     .section-box p {
@@ -94,19 +95,18 @@
       line-height: 1.5;
     }
 
-    /* Сітка керівництва */
+    /* Керівництво */
     .leaders-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 10px;
-      margin-top: 10px;
     }
 
     .leader-item {
-      background: rgba(0, 0, 0, 0.2);
+      background: rgba(0, 0, 0, 0.25);
       border: 1px solid var(--border-color);
-      border-radius: 8px;
-      padding: 10px;
+      border-radius: 10px;
+      padding: 10px 12px;
     }
 
     .leader-name { font-size: 13px; font-weight: 700; color: #fff; }
@@ -122,7 +122,7 @@
 
     .btn-main {
       width: 100%;
-      padding: 14px;
+      padding: 13px;
       border: none;
       border-radius: 10px;
       font-size: 14px;
@@ -135,29 +135,19 @@
       transition: all 0.2s ease;
     }
 
-    .btn-blue {
-      background: var(--accent-blue);
-      color: #fff;
-    }
+    .btn-blue { background: var(--accent-blue); color: #fff; }
     .btn-blue:hover { background: var(--accent-blue-hover); }
 
-    .btn-dark {
-      background: var(--accent-dark);
-      color: #fff;
-      border: 1px solid var(--border-color);
-    }
+    .btn-dark { background: var(--accent-dark); color: #fff; border: 1px solid var(--border-color); }
     .btn-dark:hover { background: #283548; }
 
-    .btn-red-dark {
-      background: var(--accent-red-dark);
-      color: var(--accent-red-text);
-      border: 1px solid rgba(248, 113, 113, 0.2);
-    }
+    .btn-red-dark { background: var(--accent-red-dark); color: var(--accent-red-text); border: 1px solid rgba(248, 113, 113, 0.2); }
     .btn-red-dark:hover { background: #3a2027; }
 
-    /* Екрани вкладок / Модалки */
+    /* Екрани вкладок */
     .view-screen { display: none; width: 100%; }
     .view-screen.active { display: block; }
+
     .back-btn {
       background: transparent;
       border: none;
@@ -171,6 +161,15 @@
       gap: 6px;
     }
 
+    /* Сітка форм */
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .full-width { grid-column: span 2; }
+
     input, select {
       width: 100%;
       padding: 10px 12px;
@@ -179,22 +178,28 @@
       border-radius: 8px;
       color: #fff;
       font-size: 13px;
-      margin-bottom: 10px;
       outline: none;
+      transition: border-color 0.2s;
     }
-    input:focus { border-color: var(--accent-blue); }
+
+    input:focus, select:focus { border-color: var(--accent-blue); }
+
+    @media (max-width: 520px) {
+      .form-grid { grid-template-columns: 1fr; }
+      .full-width { grid-column: span 1; }
+    }
   </style>
 </head>
 <body>
 
 <div class="portal-card">
 
-  <!-- ГОЛОВНА СТОРІНКА ПОРТАЛУ -->
+  <!-- ГОЛОВНА СТОРІНКА -->
   <div id="home_view" class="view-screen active">
     <div style="display: flex; flex-direction: column; align-items: center;">
       <div class="avatar-wrap">
-        <!-- Замініть logo.png на пряме посилання на ваш логотип SKAY -->
-        <img src="https://via.placeholder.com/90/000000/ffffff?text=SKAY" alt="SKAY Logo">
+        <!-- Посилання на логотип клану -->
+        <img src="https://i.ibb.co/1q1mXn4/skay-logo.png" alt="SKAY Logo" onerror="this.src='https://via.placeholder.com/96/0b0d12/3b82f6?text=SKAY'">
       </div>
       <div class="portal-header">
         <h1>SKAY CLAN</h1>
@@ -241,17 +246,19 @@
     <button class="back-btn" onclick="openView('home_view')">← Повернутися назад</button>
     <div class="section-box">
       <h3>ПОДАТИ ЗАЯВКУ НА ВСТУП</h3>
-      <input type="text" id="app_nick" placeholder="Ігровий Нікнейм">
-      <input type="text" id="app_bday" placeholder="День народження (ДД.ММ)">
-      <input type="text" id="app_card" placeholder="Останні 6 цифр картки">
-      <input type="text" id="app_id" placeholder="Ігровий ID">
-      <input type="text" id="app_discord" placeholder="Discord User/ID">
-      <input type="number" id="app_age" placeholder="Ваш вік">
-      <input type="text" id="app_time" placeholder="Онлайн у грі (год)">
-      <input type="number" id="app_rp" placeholder="Знання РП (1-10)">
-      <input type="text" id="app_m4" placeholder="Прокачка M4A4 (%)">
-      <input type="text" id="app_inviter" placeholder="Хто запросив">
-      <button class="btn-main btn-blue" style="margin-top:10px;" onclick="submitApplication()">Надіслати заявку</button>
+      <div class="form-grid">
+        <input type="text" id="app_nick" placeholder="Ігровий Нікнейм">
+        <input type="text" id="app_bday" placeholder="День народження (ДД.ММ)">
+        <input type="text" id="app_card" placeholder="Останні 6 цифр картки">
+        <input type="text" id="app_id" placeholder="Ігровий ID">
+        <input type="text" id="app_discord" placeholder="Discord User/ID">
+        <input type="number" id="app_age" placeholder="Ваш вік">
+        <input type="text" id="app_time" placeholder="Онлайн у грі (год)">
+        <input type="number" id="app_rp" placeholder="Знання РП (1-10)">
+        <input type="text" id="app_m4" placeholder="Прокачка M4A4 (%)">
+        <input type="text" id="app_inviter" placeholder="Хто запросив">
+      </div>
+      <button class="btn-main btn-blue" style="margin-top:14px;" onclick="submitApplication()">Надіслати заявку</button>
     </div>
   </div>
 
@@ -261,48 +268,53 @@
     <div class="section-box">
       <h3>АВТОРИЗАЦІЯ СОКЛАНІВЦЯ</h3>
       <input type="text" id="user_card" placeholder="Введіть 6 цифр вашої картки">
-      <button class="btn-main btn-blue" onclick="loginUser()">Увійти в кабінет</button>
+      <button class="btn-main btn-blue" style="margin-top:8px;" onclick="loginUser()">Увійти в кабінет</button>
     </div>
 
     <div id="cabinet_info" class="section-box" style="display:none;">
       <h3>ІНФОРМАЦІЯ</h3>
-      <p><b>Нік:</b> <span id="res_nick">-</span></p>
-      <p><b>Ранг:</b> <span id="res_rank">-</span></p>
-      <p><b>Баланс:</b> <span id="res_balance">-</span></p>
-      <p><b>Штрафи/Догани:</b> <span id="res_reprimands">-</span></p>
+      <p style="margin-bottom:4px;"><b>Нік:</b> <span id="res_nick" style="color:#fff;">-</span></p>
+      <p style="margin-bottom:4px;"><b>Ранг:</b> <span id="res_rank" style="color:#fff;">-</span></p>
+      <p style="margin-bottom:4px;"><b>Баланс:</b> <span id="res_balance" style="color:var(--accent-blue);">0 грн.</span></p>
+      <p><b>Штрафи/Догани:</b> <span id="res_reprimands" style="color:var(--accent-red-text);">0/3</span></p>
     </div>
   </div>
 
   <!-- КАБІНЕТ КЕРІВНИЦТВА -->
   <div id="admin_view" class="view-screen">
     <button class="back-btn" onclick="openView('home_view')">← Повернутися назад</button>
+    
     <div id="admin_login_box" class="section-box">
       <h3>ВХІД ДЛЯ КЕРІВНИЦТВА</h3>
       <input type="password" id="admin_pin" placeholder="Введіть PIN-код">
-      <button class="btn-main btn-blue" onclick="adminLogin()">Авторизуватись</button>
+      <button class="btn-main btn-blue" style="margin-top:8px;" onclick="adminLogin()">Авторизуватись</button>
     </div>
 
     <div id="admin_panel" style="display:none;">
       <div class="section-box">
         <h3>ПРИЙОМ ПРОДУКЦІЇ (<span id="admin_name_disp"></span>)</h3>
-        <select id="prod_type"><option>Петрушка</option><option>Алкоголь</option></select>
-        <input type="text" id="prod_member_id" placeholder="ID сокланівця">
-        <input type="number" id="qty1" placeholder="1⭐ Кількість">
-        <input type="number" id="qty2" placeholder="2⭐ Кількість">
-        <input type="number" id="qty3" placeholder="3⭐ Кількість">
-        <button class="btn-main btn-blue" onclick="sendProduct()">Прийняти товар</button>
+        <select id="prod_type" style="margin-bottom:10px;"><option>Петрушка</option><option>Алкоголь</option></select>
+        <input type="text" id="prod_member_id" placeholder="ID сокланівця" style="margin-bottom:10px;">
+        <div class="form-grid">
+          <input type="number" id="qty1" placeholder="1⭐ Кількість">
+          <input type="number" id="qty2" placeholder="2⭐ Кількість">
+          <input type="number" id="qty3" placeholder="3⭐ Кількість" class="full-width">
+        </div>
+        <button class="btn-main btn-blue" style="margin-top:10px;" onclick="sendProduct()">Прийняти товар</button>
       </div>
 
       <div class="section-box">
         <h3>ВИДАЧА ЗБРОЇ</h3>
-        <input type="text" id="w_nick" placeholder="Нікнейм сокланівця">
-        <select id="w_rank">
-          <option>Молодший</option><option>Місцевий</option>
-          <option>Старший</option><option>Модератор</option><option>Лідер</option>
-        </select>
-        <input type="number" id="w_m4" placeholder="M4 (0 за нормою)">
-        <input type="number" id="w_armor" placeholder="Броня (0 за нормою)">
-        <button class="btn-main btn-red-dark" onclick="giveWeapon()">Видати зі списанням</button>
+        <div class="form-grid">
+          <input type="text" id="w_nick" placeholder="Нікнейм сокланівця">
+          <select id="w_rank">
+            <option>Молодший</option><option>Місцевий</option>
+            <option>Старший</option><option>Модератор</option><option>Лідер</option>
+          </select>
+          <input type="number" id="w_m4" placeholder="M4 (0 за нормою)">
+          <input type="number" id="w_armor" placeholder="Броня (0 за нормою)">
+        </div>
+        <button class="btn-main btn-red-dark" style="margin-top:10px;" onclick="giveWeapon()">Видати зі списанням</button>
       </div>
     </div>
   </div>
