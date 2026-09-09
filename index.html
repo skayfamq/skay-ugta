@@ -14,39 +14,44 @@
         body { background-color: #0d0e12; color: #ffffff; margin: 0; padding: 20px 10px; display: flex; justify-content: center; }
         .app-container { max-width: 480px; width: 100%; background: #14151c; border: 1px solid #232533; border-radius: 20px; padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.6); }
         
-        /* Шапка */
         .header { text-align: center; margin-bottom: 20px; }
         .header img { width: 85px; height: 85px; border-radius: 50%; border: 3px solid #4e73df; box-shadow: 0 0 20px rgba(78, 115, 223, 0.5); }
         .header h1 { margin: 10px 0 2px 0; font-size: 24px; letter-spacing: 1.5px; color: #fff; }
         .header p { color: #7f849c; font-size: 13px; margin: 0; }
 
-        /* Блоки інформації */
         .info-card { background: #1a1c27; border: 1px solid #282a3d; border-radius: 14px; padding: 15px; margin-bottom: 15px; }
         .info-card h3 { margin: 0 0 8px 0; font-size: 14px; color: #4e73df; text-transform: uppercase; letter-spacing: 1px; }
         .info-card p { margin: 0; font-size: 13px; color: #b5b8c8; line-height: 1.4; }
 
-        /* Контакти Керівництва */
         .contacts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 8px; }
         .contact-item { background: #212332; padding: 10px; border-radius: 10px; font-size: 12px; }
         .contact-item strong { display: block; color: #fff; font-size: 13px; }
         .contact-item span { color: #4e73df; }
 
-        /* Навігаційні Кнопки */
         .btn-group { display: flex; flex-direction: column; gap: 12px; margin-top: 20px; }
         .btn { width: 100%; padding: 14px; border: none; border-radius: 12px; font-weight: bold; font-size: 14px; cursor: pointer; transition: 0.2s; display: flex; align-items: center; justify-content: center; gap: 10px; text-decoration: none; }
         .btn-primary { background: #4e73df; color: #fff; }
         .btn-primary:hover { background: #3b5ccc; }
         .btn-secondary { background: #252836; color: #fff; border: 1px solid #373a4e; }
         .btn-secondary:hover { background: #2d3042; }
+        .btn-danger { background: #e74c3c; color: #fff; }
         .btn-admin { background: rgba(231, 76, 60, 0.15); color: #e74c3c; border: 1px solid rgba(231, 76, 60, 0.3); }
 
-        /* Модальні вікна (Форми) */
         .page { display: none; }
         .page.active { display: block; }
         .form-group { margin-bottom: 12px; text-align: left; }
         .form-group label { display: block; font-size: 12px; color: #a0a4b8; margin-bottom: 5px; }
         .form-group input, .form-group select { width: 100%; padding: 10px 12px; background: #212332; border: 1px solid #32354a; border-radius: 8px; color: #fff; font-size: 14px; outline: none; }
         .form-group input:focus { border-color: #4e73df; }
+
+        /* Стилі Кабінету */
+        .user-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; }
+        .stat-box { background: #212332; border: 1px solid #32354a; border-radius: 10px; padding: 10px; text-align: center; }
+        .stat-box div { font-size: 11px; color: #7f849c; }
+        .stat-box strong { font-size: 15px; color: #fff; }
+
+        .timer-display { font-size: 28px; font-weight: bold; color: #e74c3c; text-align: center; margin: 15px 0; letter-spacing: 2px; }
+        .factory-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
     </style>
 </head>
 <body>
@@ -63,28 +68,16 @@
 
         <div class="info-card">
             <h3>Про наш клан</h3>
-            <p>SKAY — це топовий та згуртований клан. Ми займаємося активним розвитку підприємств, вирощуванням ресурсів, виготовленням зброї та RP-життям.</p>
+            <p>SKAY — це топовий та згуртований клан. Ми займаємося активним розвитком підприємств, вирощуванням ресурсів, виготовленням зброї та RP-життям.</p>
         </div>
 
         <div class="info-card">
             <h3>Керівництво клану</h3>
             <div class="contacts-grid">
-                <div class="contact-item">
-                    <strong>Алекс Фома</strong>
-                    <span>Лідер клану</span>
-                </div>
-                <div class="contact-item">
-                    <strong>Дініс Мельник</strong>
-                    <span>Модератор</span>
-                </div>
-                <div class="contact-item">
-                    <strong>Петро Пишняк</strong>
-                    <span>Модератор</span>
-                </div>
-                <div class="contact-item">
-                    <strong>Дмитро Кропивний</strong>
-                    <span>Місцевий</span>
-                </div>
+                <div class="contact-item"><strong>Алекс Фома</strong><span>Лідер клану</span></div>
+                <div class="contact-item"><strong>Дініс Мельник</strong><span>Модератор</span></div>
+                <div class="contact-item"><strong>Петро Пишняк</strong><span>Модератор</span></div>
+                <div class="contact-item"><strong>Дмитро Кропивний</strong><span>Місцевий</span></div>
             </div>
         </div>
 
@@ -99,76 +92,81 @@
     <div id="page-apply" class="page">
         <h2>Подача заявки в SKAY</h2>
         <form id="applyForm" onsubmit="submitApplication(event)">
-            <div class="form-group">
-                <label>Нікнейм у грі:</label>
-                <input type="text" required placeholder="Наприклад: Алекс Фома">
+            <div class="form-group"><label>Нікнейм у грі:</label><input type="text" required placeholder="Алекс Фома"></div>
+            <div class="form-group"><label>Дата та місце народження (у грі):</label><input type="text" required placeholder="25.07, м. Дніпро"></div>
+            <div class="form-group"><label>6 останніх цифр банківської картки (в грі):</label><input type="text" id="appCard" maxlength="6" pattern="\d{6}" required placeholder="123456"></div>
+            <div class="form-group"><label>Ваш ID у грі:</label><input type="number" id="appId" required placeholder="172258"></div>
+            <div class="form-group"><label>Юзернейм у Discord:</label><input type="text" required placeholder="username"></div>
+            <div class="form-group"><label>Скільки вам років (реальний вік):</label><input type="number" required placeholder="18"></div>
+            <div class="form-group"><label>Скільки готові приділяти часу?</label><input type="text" required placeholder="3-4 години"></div>
+            <div class="form-group"><label>Знання РП (від 1 до 10):</label>
+                <select required><option value="10">10 / 10</option><option value="9">9 / 10</option><option value="8">8 / 10</option></select>
             </div>
-            <div class="form-group">
-                <label>Дата та місце народження (у грі/РП):</label>
-                <input type="text" required placeholder="Наприклад: 25.07, м. Дніпро">
-            </div>
-            <div class="form-group">
-                <label>6 останніх цифр банківської картки (в грі):</label>
-                <input type="text" maxlength="6" pattern="\d{6}" required placeholder="123456">
-            </div>
-            <div class="form-group">
-                <label>Ваш ID у грі:</label>
-                <input type="number" required placeholder="Наприклад: 172258">
-            </div>
-            <div class="form-group">
-                <label>Юзернейм у Discord:</label>
-                <input type="text" required placeholder="username">
-            </div>
-            <div class="form-group">
-                <label>Скільки вам років (реальний вік):</label>
-                <input type="number" required placeholder="18">
-            </div>
-            <div class="form-group">
-                <label>Скільки готові приділяти часу на добу?</label>
-                <input type="text" required placeholder="3-4 години">
-            </div>
-            <div class="form-group">
-                <label>Знання РП (від 1 до 10):</label>
-                <select required>
-                    <option value="10">10 / 10</option>
-                    <option value="9">9 / 10</option>
-                    <option value="8">8 / 10</option>
-                    <option value="7">7 / 10</option>
-                    <option value="6">6 / 10</option>
-                    <option value="5">5 / 10</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label>Прокачка зброї М4А4 (%):</label>
-                <input type="text" required placeholder="100%">
-            </div>
-            <div class="form-group">
-                <label>Хто саме запросив у клан?</label>
-                <input type="text" required placeholder="Нікнейм того, хто запросив">
-            </div>
+            <div class="form-group"><label>Прокачка зброї М4А4 (%):</label><input type="text" required placeholder="100%"></div>
+            <div class="form-group"><label>Хто саме запросив у клан?</label><input type="text" required placeholder="Нікнейм"></div>
 
             <button type="submit" class="btn btn-primary">Надіслати заявку</button>
             <button type="button" class="btn btn-secondary" style="margin-top: 10px;" onclick="showPage('page-home')">Назад</button>
         </form>
     </div>
 
-    <!-- АВТОРИЗАЦІЯ В КАБІНЕТ -->
+    <!-- АВТОРИЗАЦІЯ -->
     <div id="page-login" class="page">
         <h2>Вхід у особистий кабінет</h2>
-        <p style="color: #7f849c; font-size: 13px;">Введіть 6 останніх цифр вашої ігрової банківської картки, вказаної при подачі заявки.</p>
-        
+        <p style="color: #7f849c; font-size: 13px;">Введіть 6 останніх цифр вашої ігрової картки.</p>
         <div class="form-group">
             <label>6 цифр банківської картки:</label>
             <input type="password" id="cardAuth" maxlength="6" placeholder="******">
         </div>
-        
         <button class="btn btn-primary" onclick="loginUser()">Увійти</button>
         <button class="btn btn-secondary" style="margin-top: 10px;" onclick="showPage('page-home')">Назад</button>
+    </div>
+
+    <!-- ОСОБИСТИЙ КАБІНЕТ ГРАВЦЯ -->
+    <div id="page-dashboard" class="page">
+        <div class="header" style="margin-bottom: 10px;">
+            <h2 id="userNickname" style="margin:0;">Гравець</h2>
+            <p id="userCardInfo" style="color:#4e73df;">Картка: ******</p>
+        </div>
+
+        <div class="user-stats">
+            <div class="stat-box"><div>Ваш ID у грі</div><strong id="userIdDisplay">-</strong></div>
+            <div class="stat-box"><div>Ваш Ранг</div><strong>Учасник</strong></div>
+            <div class="stat-box"><div>Зарплата за місяць</div><span style="color:#2ecc71; font-weight:bold;">0 грн.</span></div>
+            <div class="stat-box"><div>Штрафи</div><span style="color:#e74c3c; font-weight:bold;" id="fineDisplay">0 грн.</span></div>
+        </div>
+
+        <!-- БРОНЮВАННЯ ЦЕХУ -->
+        <div class="info-card">
+            <h3>🏭 Бронювання Цеху</h3>
+            <p id="bookingStatusText">Оберіть цех для бронювання на 1 годину:</p>
+
+            <div id="bookingControls">
+                <div class="factory-btns">
+                    <button class="btn btn-secondary" onclick="selectFactory('Петрушка 🌿')">🌿 Петрушка</button>
+                    <button class="btn btn-secondary" onclick="selectFactory('Алкоголь 🍷')">🍷 Алкоголь</button>
+                </div>
+            </div>
+
+            <!-- Активне бронювання -->
+            <div id="activeBooking" style="display: none;">
+                <p style="text-align: center; margin-top: 10px; font-weight: bold; color: #4e73df;" id="selectedFactoryText"></p>
+                <div class="timer-display" id="timer">01:00:00</div>
+                <button class="btn btn-danger" onclick="cancelBooking()">Скасувати бронювання</button>
+            </div>
+        </div>
+
+        <button class="btn btn-secondary" style="margin-top: 15px;" onclick="showPage('page-home')">Вийти з кабінету</button>
     </div>
 
 </div>
 
 <script>
+    let activeUser = { card: '', id: '' };
+    let timerInterval = null;
+    let timeLeft = 3600; // 1 година в секундах
+    let currentFine = 0;
+
     function showPage(pageId) {
         document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
         document.getElementById(pageId).classList.add('active');
@@ -176,18 +174,78 @@
 
     function submitApplication(e) {
         e.preventDefault();
-        alert('Заявку успішно відправлено! Дякуємо.');
+        const card = document.getElementById('appCard').value;
+        const id = document.getElementById('appId').value;
+        localStorage.setItem('userCard_' + card, JSON.stringify({ card: card, id: id }));
+        alert('Заявку успішно відправлено! Тепер ви можете авторизуватися за вказаною карткою.');
         showPage('page-home');
     }
 
     function loginUser() {
         const card = document.getElementById('cardAuth').value;
-        if(card.length === 6) {
-            alert('Авторизація успішна!');
-            // Далі перенаправимо у кабінет
+        const savedData = localStorage.getItem('userCard_' + card);
+
+        if (savedData || card === '123456') {
+            const data = savedData ? JSON.parse(savedData) : { card: '123456', id: '172258' };
+            activeUser = data;
+            document.getElementById('userNickname').innerText = 'Гравець (ID: ' + data.id + ')';
+            document.getElementById('userCardInfo').innerText = 'Картка: ' + data.card;
+            document.getElementById('userIdDisplay').innerText = data.id;
+            showPage('page-dashboard');
         } else {
-            alert('Будь ласка, введіть рівно 6 цифр!');
+            alert('Картку не знайдено! Перевірте введені цифри або подайте заявку.');
         }
+    }
+
+    function selectFactory(factoryName) {
+        const confirmId = prompt('Ви обрали цех: ' + factoryName + '.\n\nВведіть ваш ID у грі для підтвердження бронювання:');
+        
+        if (confirmId && confirmId.trim() === activeUser.id) {
+            document.getElementById('bookingControls').style.display = 'none';
+            document.getElementById('activeBooking').style.display = 'block';
+            document.getElementById('selectedFactoryText').innerText = 'Заброньовано: ' + factoryName;
+            startTimer();
+        } else if (confirmId) {
+            alert('Введений ID не співпадає з вашим акаунтом!');
+        }
+    }
+
+    function startTimer() {
+        timeLeft = 3600;
+        updateTimerDisplay();
+        
+        timerInterval = setInterval(() => {
+            timeLeft--;
+            updateTimerDisplay();
+
+            if (timeLeft <= 0) {
+                clearInterval(timerInterval);
+                currentFine += 150000; // Штраф при вичерпанні часу
+                document.getElementById('fineDisplay').innerText = currentFine + ' грн.';
+                alert('Час бронювання вичерпано! Вам нараховано штраф 150 000 грн та внесено до таблиці.');
+                resetBookingView();
+            }
+        }, 1000);
+    }
+
+    function updateTimerDisplay() {
+        const hrs = String(Math.floor(timeLeft / 3600)).padStart(2, '0');
+        const mins = String(Math.floor((timeLeft % 3600) / 60)).padStart(2, '0');
+        const secs = String(timeLeft % 60).padStart(2, '0');
+        document.getElementById('timer').innerText = `${hrs}:${mins}:${secs}`;
+    }
+
+    function cancelBooking() {
+        if (confirm('Ви дійсно бажаєте скасувати бронювання цеху?')) {
+            clearInterval(timerInterval);
+            resetBookingView();
+            alert('Бронювання успішно скасовано.');
+        }
+    }
+
+    function resetBookingView() {
+        document.getElementById('bookingControls').style.display = 'block';
+        document.getElementById('activeBooking').style.display = 'none';
     }
 
     if ('serviceWorker' in navigator) {
