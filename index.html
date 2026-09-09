@@ -1,256 +1,176 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SKAY Clan — Портал</title>
-    
-    <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#0f0f12">
-    <link rel="apple-touch-icon" href="icon.png">
-
-    <style>
-        * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background-color: #0d0e12; color: #ffffff; margin: 0; padding: 20px 10px; display: flex; justify-content: center; }
-        .app-container { max-width: 480px; width: 100%; background: #14151c; border: 1px solid #232533; border-radius: 20px; padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.6); }
-        
-        .header { text-align: center; margin-bottom: 20px; }
-        .header img { width: 85px; height: 85px; border-radius: 50%; border: 3px solid #4e73df; box-shadow: 0 0 20px rgba(78, 115, 223, 0.5); }
-        .header h1 { margin: 10px 0 2px 0; font-size: 24px; letter-spacing: 1.5px; color: #fff; }
-        .header p { color: #7f849c; font-size: 13px; margin: 0; }
-
-        .info-card { background: #1a1c27; border: 1px solid #282a3d; border-radius: 14px; padding: 15px; margin-bottom: 15px; }
-        .info-card h3 { margin: 0 0 8px 0; font-size: 14px; color: #4e73df; text-transform: uppercase; letter-spacing: 1px; }
-        .info-card p { margin: 0; font-size: 13px; color: #b5b8c8; line-height: 1.4; }
-
-        .contacts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 8px; }
-        .contact-item { background: #212332; padding: 10px; border-radius: 10px; font-size: 12px; }
-        .contact-item strong { display: block; color: #fff; font-size: 13px; }
-        .contact-item span { color: #4e73df; }
-
-        .btn-group { display: flex; flex-direction: column; gap: 12px; margin-top: 20px; }
-        .btn { width: 100%; padding: 14px; border: none; border-radius: 12px; font-weight: bold; font-size: 14px; cursor: pointer; transition: 0.2s; display: flex; align-items: center; justify-content: center; gap: 10px; text-decoration: none; }
-        .btn-primary { background: #4e73df; color: #fff; }
-        .btn-primary:hover { background: #3b5ccc; }
-        .btn-secondary { background: #252836; color: #fff; border: 1px solid #373a4e; }
-        .btn-secondary:hover { background: #2d3042; }
-        .btn-danger { background: #e74c3c; color: #fff; }
-        .btn-admin { background: rgba(231, 76, 60, 0.15); color: #e74c3c; border: 1px solid rgba(231, 76, 60, 0.3); }
-
-        .page { display: none; }
-        .page.active { display: block; }
-        .form-group { margin-bottom: 12px; text-align: left; }
-        .form-group label { display: block; font-size: 12px; color: #a0a4b8; margin-bottom: 5px; }
-        .form-group input, .form-group select { width: 100%; padding: 10px 12px; background: #212332; border: 1px solid #32354a; border-radius: 8px; color: #fff; font-size: 14px; outline: none; }
-        .form-group input:focus { border-color: #4e73df; }
-
-        /* Стилі Кабінету */
-        .user-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; }
-        .stat-box { background: #212332; border: 1px solid #32354a; border-radius: 10px; padding: 10px; text-align: center; }
-        .stat-box div { font-size: 11px; color: #7f849c; }
-        .stat-box strong { font-size: 15px; color: #fff; }
-
-        .timer-display { font-size: 28px; font-weight: bold; color: #e74c3c; text-align: center; margin: 15px 0; letter-spacing: 2px; }
-        .factory-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
-    </style>
+  <meta charset="UTF-8">
+  <title>SKAY Clan Portal</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #121212; color: #fff; margin: 0; padding: 20px; }
+    .container { max-width: 800px; margin: auto; background: #1e1e1e; padding: 20px; border-radius: 8px; }
+    .nav { display: flex; gap: 10px; margin-bottom: 20px; }
+    .nav button { flex: 1; padding: 10px; background: #333; color: #fff; border: none; cursor: pointer; border-radius: 4px; }
+    .nav button.active { background: #0088cc; }
+    .tab { display: none; }
+    .tab.active { display: block; }
+    input, select, button { width: 100%; padding: 10px; margin: 8px 0; border-radius: 4px; border: 1px solid #444; background: #222; color: #fff; box-sizing: border-box; }
+    button.submit-btn { background: #28a745; font-weight: bold; cursor: pointer; border: none; }
+    .card-box { background: #2a2a2a; padding: 15px; border-radius: 6px; margin-top: 15px; }
+  </style>
 </head>
 <body>
 
-<div class="app-container">
+<div class="container">
+  <h2>SKAY CLAN PORTAL</h2>
+  
+  <div class="nav">
+    <button class="active" onclick="switchTab('apply')">📝 Подати заявку</button>
+    <button onclick="switchTab('cabinet')">🔑 Кабінет</button>
+    <button onclick="switchTab('admin')">💼 Керівництво</button>
+  </div>
 
-    <!-- ГОЛОВНА СТОРІНКА -->
-    <div id="page-home" class="page active">
-        <div class="header">
-            <img src="icon.png" alt="SKAY Logo">
-            <h1>SKAY CLAN</h1>
-            <p>Офіційний портал клану UKRAINE GTA</p>
-        </div>
+  <!-- Вкладка 1: Анкета -->
+  <div id="apply" class="tab active">
+    <h3>Подати заявку на вступ</h3>
+    <input type="text" id="app_nick" placeholder="Ігровий Нікнейм">
+    <input type="text" id="app_bday" placeholder="День народження (ДД.ММ)">
+    <input type="text" id="app_card" placeholder="Останні 6 цифр картки">
+    <input type="text" id="app_id" placeholder="Ігровий ID">
+    <input type="text" id="app_discord" placeholder="Discord User/ID">
+    <input type="number" id="app_age" placeholder="Ваш вік">
+    <input type="text" id="app_time" placeholder="Онлайн у грі (наприклад: 3-4 год)">
+    <input type="number" id="app_rp" placeholder="Знання РП (від 1 до 10)">
+    <input type="text" id="app_m4" placeholder="Прокачка M4A4 (%)">
+    <input type="text" id="app_inviter" placeholder="Хто запросив">
+    <button class="submit-btn" onclick="submitApplication()">Надіслати заявку</button>
+  </div>
 
-        <div class="info-card">
-            <h3>Про наш клан</h3>
-            <p>SKAY — це топовий та згуртований клан. Ми займаємося активним розвитком підприємств, вирощуванням ресурсів, виготовленням зброї та RP-життям.</p>
-        </div>
+  <!-- Вкладка 2: Особистий Кабінет -->
+  <div id="cabinet" class="tab">
+    <h3>Авторизація сокланівця</h3>
+    <input type="text" id="user_card" placeholder="Введіть 6 цифр вашої картки">
+    <button class="submit-btn" onclick="loginUser()">Увійти в кабінет</button>
+    
+    <div id="cabinet_info" class="card-box" style="display:none;"></div>
+  </div>
 
-        <div class="info-card">
-            <h3>Керівництво клану</h3>
-            <div class="contacts-grid">
-                <div class="contact-item"><strong>Алекс Фома</strong><span>Лідер клану</span></div>
-                <div class="contact-item"><strong>Дініс Мельник</strong><span>Модератор</span></div>
-                <div class="contact-item"><strong>Петро Пишняк</strong><span>Модератор</span></div>
-                <div class="contact-item"><strong>Дмитро Кропивний</strong><span>Місцевий</span></div>
-            </div>
-        </div>
-
-        <div class="btn-group">
-            <button class="btn btn-primary" onclick="showPage('page-apply')">📝 Подати заявку в клан</button>
-            <button class="btn btn-secondary" onclick="showPage('page-login')">🔑 Авторизація в Мій кабінет</button>
-            <button class="btn btn-admin" onclick="showPage('page-admin')">👑 Кабінет керівництва</button>
-        </div>
+  <!-- Вкладка 3: Панель Керівництва -->
+  <div id="admin" class="tab">
+    <div id="admin_login_box">
+      <h3>Вхід для Модераторів</h3>
+      <input type="password" id="admin_pin" placeholder="Введіть 7-значний PIN">
+      <button class="submit-btn" onclick="adminLogin()">Увійти</button>
     </div>
 
-    <!-- ФОРМА ПОДАЧІ ЗАЯВКИ -->
-    <div id="page-apply" class="page">
-        <h2>Подача заявки в SKAY</h2>
-        <form id="applyForm" onsubmit="submitApplication(event)">
-            <div class="form-group"><label>Нікнейм у грі:</label><input type="text" required placeholder="Алекс Фома"></div>
-            <div class="form-group"><label>Дата та місце народження (у грі):</label><input type="text" required placeholder="25.07, м. Дніпро"></div>
-            <div class="form-group"><label>6 останніх цифр банківської картки (в грі):</label><input type="text" id="appCard" maxlength="6" pattern="\d{6}" required placeholder="123456"></div>
-            <div class="form-group"><label>Ваш ID у грі:</label><input type="number" id="appId" required placeholder="172258"></div>
-            <div class="form-group"><label>Юзернейм у Discord:</label><input type="text" required placeholder="username"></div>
-            <div class="form-group"><label>Скільки вам років (реальний вік):</label><input type="number" required placeholder="18"></div>
-            <div class="form-group"><label>Скільки готові приділяти часу?</label><input type="text" required placeholder="3-4 години"></div>
-            <div class="form-group"><label>Знання РП (від 1 до 10):</label>
-                <select required><option value="10">10 / 10</option><option value="9">9 / 10</option><option value="8">8 / 10</option></select>
-            </div>
-            <div class="form-group"><label>Прокачка зброї М4А4 (%):</label><input type="text" required placeholder="100%"></div>
-            <div class="form-group"><label>Хто саме запросив у клан?</label><input type="text" required placeholder="Нікнейм"></div>
+    <div id="admin_panel" style="display:none;">
+      <h3>Вітаємо, <span id="admin_name_disp"></span>!</h3>
+      
+      <h4>📦 Прийом продукції</h4>
+      <select id="prod_type"><option>Петрушка</option><option>Алкоголь</option></select>
+      <input type="text" id="prod_member_id" placeholder="ID сокланівця">
+      <input type="number" id="qty1" placeholder="1⭐ Кількість">
+      <input type="number" id="qty2" placeholder="2⭐ Кількість">
+      <input type="number" id="qty3" placeholder="3⭐ Кількість">
+      <button class="submit-btn" onclick="sendProduct()">Прийняти товар</button>
 
-            <button type="submit" class="btn btn-primary">Надіслати заявку</button>
-            <button type="button" class="btn btn-secondary" style="margin-top: 10px;" onclick="showPage('page-home')">Назад</button>
-        </form>
+      <hr style="border-color:#444; margin:20px 0;">
+
+      <h4>🔫 Видача зброї сокланівцю</h4>
+      <input type="text" id="w_nick" placeholder="Нікнейм сокланівця">
+      <select id="w_rank">
+        <option>Молодший</option><option>Місцевий</option>
+        <option>Старший</option><option>Модератор</option><option>Лідер</option>
+      </select>
+      <input type="number" id="w_m4" placeholder="Кількість M4 (або 0 за нормою)">
+      <input type="number" id="w_armor" placeholder="Кількість Броні (або 0 за нормою)">
+      <button class="submit-btn" style="background:#dc3545;" onclick="giveWeapon()">Видати зі списанням зі складу</button>
     </div>
-
-    <!-- АВТОРИЗАЦІЯ -->
-    <div id="page-login" class="page">
-        <h2>Вхід у особистий кабінет</h2>
-        <p style="color: #7f849c; font-size: 13px;">Введіть 6 останніх цифр вашої ігрової картки.</p>
-        <div class="form-group">
-            <label>6 цифр банківської картки:</label>
-            <input type="password" id="cardAuth" maxlength="6" placeholder="******">
-        </div>
-        <button class="btn btn-primary" onclick="loginUser()">Увійти</button>
-        <button class="btn btn-secondary" style="margin-top: 10px;" onclick="showPage('page-home')">Назад</button>
-    </div>
-
-    <!-- ОСОБИСТИЙ КАБІНЕТ ГРАВЦЯ -->
-    <div id="page-dashboard" class="page">
-        <div class="header" style="margin-bottom: 10px;">
-            <h2 id="userNickname" style="margin:0;">Гравець</h2>
-            <p id="userCardInfo" style="color:#4e73df;">Картка: ******</p>
-        </div>
-
-        <div class="user-stats">
-            <div class="stat-box"><div>Ваш ID у грі</div><strong id="userIdDisplay">-</strong></div>
-            <div class="stat-box"><div>Ваш Ранг</div><strong>Учасник</strong></div>
-            <div class="stat-box"><div>Зарплата за місяць</div><span style="color:#2ecc71; font-weight:bold;">0 грн.</span></div>
-            <div class="stat-box"><div>Штрафи</div><span style="color:#e74c3c; font-weight:bold;" id="fineDisplay">0 грн.</span></div>
-        </div>
-
-        <!-- БРОНЮВАННЯ ЦЕХУ -->
-        <div class="info-card">
-            <h3>🏭 Бронювання Цеху</h3>
-            <p id="bookingStatusText">Оберіть цех для бронювання на 1 годину:</p>
-
-            <div id="bookingControls">
-                <div class="factory-btns">
-                    <button class="btn btn-secondary" onclick="selectFactory('Петрушка 🌿')">🌿 Петрушка</button>
-                    <button class="btn btn-secondary" onclick="selectFactory('Алкоголь 🍷')">🍷 Алкоголь</button>
-                </div>
-            </div>
-
-            <!-- Активне бронювання -->
-            <div id="activeBooking" style="display: none;">
-                <p style="text-align: center; margin-top: 10px; font-weight: bold; color: #4e73df;" id="selectedFactoryText"></p>
-                <div class="timer-display" id="timer">01:00:00</div>
-                <button class="btn btn-danger" onclick="cancelBooking()">Скасувати бронювання</button>
-            </div>
-        </div>
-
-        <button class="btn btn-secondary" style="margin-top: 15px;" onclick="showPage('page-home')">Вийти з кабінету</button>
-    </div>
-
+  </div>
 </div>
 
 <script>
-    let activeUser = { card: '', id: '' };
-    let timerInterval = null;
-    let timeLeft = 3600; // 1 година в секундах
-    let currentFine = 0;
+  // ЗАМІНІТЬ ЦЕ ПОСИЛАННЯ НА ВАШ URL З GOOGLE APPS SCRIPT
+  const API_URL = "https://script.google.com/macros/s/AKfycbwLy-MSdOMQnNV2g8jSd65yhdFYc05nFJa4RboxHp4ipn023LQBgkTdvS8eLDakIdhU/exec"; 
+  let currentAdmin = "";
 
-    function showPage(pageId) {
-        document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
-        document.getElementById(pageId).classList.add('active');
+  function switchTab(tabId) {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.nav button').forEach(b => b.classList.remove('active'));
+    document.getElementById(tabId).classList.add('active');
+    event.target.classList.add('active');
+  }
+
+  async function apiCall(data) {
+    const res = await fetch(API_URL, { method: 'POST', body: JSON.stringify(data) });
+    return await res.json();
+  }
+
+  async function submitApplication() {
+    const payload = {
+      action: "submit_application",
+      nick: document.getElementById('app_nick').value,
+      bday: document.getElementById('app_bday').value,
+      card: document.getElementById('app_card').value,
+      memberId: document.getElementById('app_id').value,
+      discord: document.getElementById('app_discord').value,
+      age: document.getElementById('app_age').value,
+      playTime: document.getElementById('app_time').value,
+      rpScore: document.getElementById('app_rp').value,
+      m4Skill: document.getElementById('app_m4').value,
+      inviter: document.getElementById('app_inviter').value,
+    };
+    const res = await apiCall(payload);
+    alert(res.message);
+  }
+
+  async function loginUser() {
+    const card = document.getElementById('user_card').value;
+    const res = await apiCall({ action: "get_member_cabinet", card: card });
+    if(res.success) {
+      const box = document.getElementById('cabinet_info');
+      box.style.display = "block";
+      box.innerHTML = `<b>Нік:</b> ${res.data.nick}<br><b>Ранг:</b> ${res.data.rank}<br><b>Баланс:</b> ${res.data.balance} грн.<br><b>Штрафи/Догани:</b> ${res.data.reprimands}`;
+    } else {
+      alert(res.message);
     }
+  }
 
-    function submitApplication(e) {
-        e.preventDefault();
-        const card = document.getElementById('appCard').value;
-        const id = document.getElementById('appId').value;
-        localStorage.setItem('userCard_' + card, JSON.stringify({ card: card, id: id }));
-        alert('Заявку успішно відправлено! Тепер ви можете авторизуватися за вказаною карткою.');
-        showPage('page-home');
+  async function adminLogin() {
+    const pin = document.getElementById('admin_pin').value;
+    const res = await apiCall({ action: "admin_login", pin: pin });
+    if(res.success) {
+      currentAdmin = res.adminName;
+      document.getElementById('admin_login_box').style.display = "none";
+      document.getElementById('admin_panel').style.display = "block";
+      document.getElementById('admin_name_disp').innerText = currentAdmin;
+    } else {
+      alert(res.message);
     }
+  }
 
-    function loginUser() {
-        const card = document.getElementById('cardAuth').value;
-        const savedData = localStorage.getItem('userCard_' + card);
+  async function sendProduct() {
+    const res = await apiCall({
+      action: "receive_product",
+      adminName: currentAdmin,
+      product: document.getElementById('prod_type').value,
+      memberId: document.getElementById('prod_member_id').value,
+      qty1: document.getElementById('qty1').value,
+      qty2: document.getElementById('qty2').value,
+      qty3: document.getElementById('qty3').value
+    });
+    alert(res.message);
+  }
 
-        if (savedData || card === '123456') {
-            const data = savedData ? JSON.parse(savedData) : { card: '123456', id: '172258' };
-            activeUser = data;
-            document.getElementById('userNickname').innerText = 'Гравець (ID: ' + data.id + ')';
-            document.getElementById('userCardInfo').innerText = 'Картка: ' + data.card;
-            document.getElementById('userIdDisplay').innerText = data.id;
-            showPage('page-dashboard');
-        } else {
-            alert('Картку не знайдено! Перевірте введені цифри або подайте заявку.');
-        }
-    }
-
-    function selectFactory(factoryName) {
-        const confirmId = prompt('Ви обрали цех: ' + factoryName + '.\n\nВведіть ваш ID у грі для підтвердження бронювання:');
-        
-        if (confirmId && confirmId.trim() === activeUser.id) {
-            document.getElementById('bookingControls').style.display = 'none';
-            document.getElementById('activeBooking').style.display = 'block';
-            document.getElementById('selectedFactoryText').innerText = 'Заброньовано: ' + factoryName;
-            startTimer();
-        } else if (confirmId) {
-            alert('Введений ID не співпадає з вашим акаунтом!');
-        }
-    }
-
-    function startTimer() {
-        timeLeft = 3600;
-        updateTimerDisplay();
-        
-        timerInterval = setInterval(() => {
-            timeLeft--;
-            updateTimerDisplay();
-
-            if (timeLeft <= 0) {
-                clearInterval(timerInterval);
-                currentFine += 150000; // Штраф при вичерпанні часу
-                document.getElementById('fineDisplay').innerText = currentFine + ' грн.';
-                alert('Час бронювання вичерпано! Вам нараховано штраф 150 000 грн та внесено до таблиці.');
-                resetBookingView();
-            }
-        }, 1000);
-    }
-
-    function updateTimerDisplay() {
-        const hrs = String(Math.floor(timeLeft / 3600)).padStart(2, '0');
-        const mins = String(Math.floor((timeLeft % 3600) / 60)).padStart(2, '0');
-        const secs = String(timeLeft % 60).padStart(2, '0');
-        document.getElementById('timer').innerText = `${hrs}:${mins}:${secs}`;
-    }
-
-    function cancelBooking() {
-        if (confirm('Ви дійсно бажаєте скасувати бронювання цеху?')) {
-            clearInterval(timerInterval);
-            resetBookingView();
-            alert('Бронювання успішно скасовано.');
-        }
-    }
-
-    function resetBookingView() {
-        document.getElementById('bookingControls').style.display = 'block';
-        document.getElementById('activeBooking').style.display = 'none';
-    }
-
-    if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => { navigator.serviceWorker.register('./sw.js'); });
-    }
+  async function giveWeapon() {
+    const res = await apiCall({
+      action: "give_weapon",
+      adminName: currentAdmin,
+      memberNick: document.getElementById('w_nick').value,
+      rank: document.getElementById('w_rank').value,
+      m4: document.getElementById('w_m4').value,
+      armor: document.getElementById('w_armor').value
+    });
+    alert(res.message);
+  }
 </script>
+
 </body>
 </html>
