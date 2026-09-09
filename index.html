@@ -265,18 +265,53 @@
   <!-- ОСОБИСТИЙ КАБІНЕТ -->
   <div id="cabinet_view" class="view-screen">
     <button class="back-btn" onclick="openView('home_view')">← Повернутися назад</button>
-    <div class="section-box">
-      <h3>АВТОРИЗАЦІЯ СОКЛАНІВЦЯ</h3>
-      <input type="text" id="user_card" placeholder="Введіть 6 цифр вашої картки">
-      <button class="btn-main btn-blue" style="margin-top:8px;" onclick="loginUser()">Увійти в кабінет</button>
+    
+    <!-- Форма входу -->
+    <div id="cab_auth_form" class="section-box">
+      <h3>🔑 Авторизація учасника</h3>
+      <input type="text" id="user_card" placeholder="Введіть останні 6 цифр вашої картки">
+      <button class="btn-main btn-blue" style="margin-top:10px;" onclick="loginUser()">Увійти</button>
     </div>
 
-    <div id="cabinet_info" class="section-box" style="display:none;">
-      <h3>ІНФОРМАЦІЯ</h3>
-      <p style="margin-bottom:4px;"><b>Нік:</b> <span id="res_nick" style="color:#fff;">-</span></p>
-      <p style="margin-bottom:4px;"><b>Ранг:</b> <span id="res_rank" style="color:#fff;">-</span></p>
-      <p style="margin-bottom:4px;"><b>Баланс:</b> <span id="res_balance" style="color:var(--accent-blue);">0 грн.</span></p>
-      <p><b>Штрафи/Догани:</b> <span id="res_reprimands" style="color:var(--accent-red-text);">0/3</span></p>
+    <!-- Меню після входу -->
+    <div id="cab_menu" class="section-box" style="display:none;">
+      <h3 style="color:#4ade80;">✅ Картку знайдено!</h3>
+      <p style="font-size:15px; color:#fff; margin-bottom:14px;">Нікнейм: <b id="res_nick">-</b></p>
+      
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap:8px; margin-bottom:8px;">
+        <button class="btn-main btn-dark" onclick="showCabTab('tab_info')">👤 Мій кабінет</button>
+        <button class="btn-main btn-dark" onclick="showCabTab('tab_report')">📊 Звіт за місяць</button>
+      </div>
+      <button class="btn-main btn-dark" style="width:100%;" onclick="showCabTab('tab_factory')">🏭 Бронювання цеху</button>
+    </div>
+
+    <!-- Вкладка 1: Мій кабінет -->
+    <div id="tab_info" class="section-box cab-tab" style="display:none;">
+      <h3>👤 ОСНОВНА ІНФОРМАЦІЯ</h3>
+      <p style="margin-bottom:6px;"><b>Ранг:</b> <span id="res_rank" style="color:#fff;">-</span></p>
+      <p style="margin-bottom:6px;"><b>Баланс:</b> <span id="res_balance" style="color:var(--accent-blue);">0 грн.</span></p>
+      <p><b>Догани / Штрафи:</b> <span id="res_reprimands" style="color:var(--accent-red-text);">0/3</span></p>
+    </div>
+
+    <!-- Вкладка 2: Звіт за місяць -->
+    <div id="tab_report" class="section-box cab-tab" style="display:none;">
+      <h3>📊 ЗВІТ ВИКОНАННЯ НОРМ ЗА МІСЯЦЬ</h3>
+      <div id="res_monthly_report" style="font-size:13px; line-height:1.8; color:var(--text-sub);">
+        <!-- Сюди завантажиться список здач по датах -->
+        Завантаження даних...
+      </div>
+    </div>
+
+    <!-- Вкладка 3: Бронювання цеху -->
+    <div id="tab_factory" class="section-box cab-tab" style="display:none;">
+      <h3>🏭 БРОНЮВАННЯ ЦЕХУ</h3>
+      <p style="margin-bottom:10px;">Оберіть, який саме цех ви бажаєте забронювати на 1 годину:</p>
+      <select id="factory_type" style="margin-bottom:10px;">
+        <option>Петрушка (Цех №1)</option>
+        <option>Алкоголь (Цех №2)</option>
+        <option>Зброя (Цех №3)</option>
+      </select>
+      <button class="btn-main btn-blue" onclick="bookFactory()">Забронювати цех</button>
     </div>
   </div>
 
