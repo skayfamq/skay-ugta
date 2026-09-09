@@ -2,100 +2,302 @@
 <html lang="uk">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SKAY Clan Portal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    body { font-family: Arial, sans-serif; background: #121212; color: #fff; margin: 0; padding: 20px; }
-    .container { max-width: 800px; margin: auto; background: #1e1e1e; padding: 20px; border-radius: 8px; }
-    .nav { display: flex; gap: 10px; margin-bottom: 20px; }
-    .nav button { flex: 1; padding: 10px; background: #333; color: #fff; border: none; cursor: pointer; border-radius: 4px; }
-    .nav button.active { background: #0088cc; }
+    :root {
+      --bg-color: #0b0e14;
+      --card-bg: rgba(22, 27, 38, 0.75);
+      --input-bg: #161b26;
+      --border-color: rgba(255, 255, 255, 0.08);
+      --accent-blue: #0088ff;
+      --accent-green: #10b981;
+      --accent-red: #ef4444;
+      --text-main: #f3f4f6;
+      --text-muted: #9ca3af;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+
+    body {
+      background-color: var(--bg-color);
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(0, 136, 255, 0.12) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(16, 185, 129, 0.08) 0px, transparent 50%);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 720px;
+      background: var(--card-bg);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 32px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .header h2 {
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      background: linear-gradient(135deg, #fff 30%, #0088ff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-transform: uppercase;
+    }
+
+    /* Навігація */
+    .nav {
+      display: flex;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 5px;
+      border-radius: 12px;
+      gap: 6px;
+      margin-bottom: 28px;
+      border: 1px solid var(--border-color);
+    }
+
+    .nav button {
+      flex: 1;
+      padding: 12px 16px;
+      background: transparent;
+      color: var(--text-muted);
+      border: none;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: all 0.25s ease;
+    }
+
+    .nav button.active {
+      background: var(--accent-blue);
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(0, 136, 255, 0.3);
+    }
+
     .tab { display: none; }
-    .tab.active { display: block; }
-    input, select, button { width: 100%; padding: 10px; margin: 8px 0; border-radius: 4px; border: 1px solid #444; background: #222; color: #fff; box-sizing: border-box; }
-    button.submit-btn { background: #28a745; font-weight: bold; cursor: pointer; border: none; }
-    .card-box { background: #2a2a2a; padding: 15px; border-radius: 6px; margin-top: 15px; }
+    .tab.active { display: block; animation: fadeIn 0.3s ease; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h3 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 18px;
+      color: #fff;
+    }
+
+    /* Форми та сітка inputs */
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+
+    .full-width { grid-column: span 2; }
+
+    input, select {
+      width: 100%;
+      padding: 12px 16px;
+      background: var(--input-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      color: #fff;
+      font-size: 14px;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+
+    input:focus, select:focus {
+      border-color: var(--accent-blue);
+      box-shadow: 0 0 0 3px rgba(0, 136, 255, 0.15);
+    }
+
+    input::placeholder { color: var(--text-muted); }
+
+    /* Кнопки дій */
+    .btn {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 15px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      margin-top: 10px;
+    }
+
+    .btn-green {
+      background: var(--accent-green);
+      color: #fff;
+      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.25);
+    }
+
+    .btn-green:hover { background: #059669; transform: translateY(-1px); }
+
+    .btn-red {
+      background: var(--accent-red);
+      color: #fff;
+      box-shadow: 0 4px 14px rgba(239, 68, 68, 0.25);
+    }
+
+    .btn-red:hover { background: #dc2626; transform: translateY(-1px); }
+
+    /* Картки кабінету */
+    .stats-card {
+      background: rgba(0, 0, 0, 0.25);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 20px;
+      margin-top: 20px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .stat-label { font-size: 12px; color: var(--text-muted); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .stat-value { font-size: 16px; font-weight: 600; color: #fff; }
+
+    @media (max-width: 600px) {
+      .form-grid { grid-template-columns: 1fr; }
+      .full-width { grid-column: span 1; }
+      .stats-card { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
 
 <div class="container">
-  <h2>SKAY CLAN PORTAL</h2>
+  <div class="header">
+    <h2>SKAY Clan Portal</h2>
+  </div>
   
   <div class="nav">
-    <button class="active" onclick="switchTab('apply')">📝 Подати заявку</button>
-    <button onclick="switchTab('cabinet')">🔑 Кабінет</button>
-    <button onclick="switchTab('admin')">💼 Керівництво</button>
+    <button class="active" onclick="switchTab('apply', event)">📝 Заявка</button>
+    <button onclick="switchTab('cabinet', event)">🔑 Кабінет</button>
+    <button onclick="switchTab('admin', event)">💼 Керівництво</button>
   </div>
 
   <!-- Вкладка 1: Анкета -->
   <div id="apply" class="tab active">
     <h3>Подати заявку на вступ</h3>
-    <input type="text" id="app_nick" placeholder="Ігровий Нікнейм">
-    <input type="text" id="app_bday" placeholder="День народження (ДД.ММ)">
-    <input type="text" id="app_card" placeholder="Останні 6 цифр картки">
-    <input type="text" id="app_id" placeholder="Ігровий ID">
-    <input type="text" id="app_discord" placeholder="Discord User/ID">
-    <input type="number" id="app_age" placeholder="Ваш вік">
-    <input type="text" id="app_time" placeholder="Онлайн у грі (наприклад: 3-4 год)">
-    <input type="number" id="app_rp" placeholder="Знання РП (від 1 до 10)">
-    <input type="text" id="app_m4" placeholder="Прокачка M4A4 (%)">
-    <input type="text" id="app_inviter" placeholder="Хто запросив">
-    <button class="submit-btn" onclick="submitApplication()">Надіслати заявку</button>
+    <div class="form-grid">
+      <input type="text" id="app_nick" placeholder="Ігровий Нікнейм">
+      <input type="text" id="app_bday" placeholder="День народження (ДД.ММ)">
+      <input type="text" id="app_card" placeholder="Останні 6 цифр картки">
+      <input type="text" id="app_id" placeholder="Ігровий ID">
+      <input type="text" id="app_discord" placeholder="Discord User/ID">
+      <input type="number" id="app_age" placeholder="Ваш вік">
+      <input type="text" id="app_time" placeholder="Онлайн (наприклад: 3-4 год)">
+      <input type="number" id="app_rp" placeholder="Знання РП (1-10)">
+      <input type="text" id="app_m4" placeholder="Прокачка M4A4 (%)">
+      <input type="text" id="app_inviter" placeholder="Хто запросив">
+      <div class="full-width">
+        <button class="btn btn-green" onclick="submitApplication()">Надіслати заявку</button>
+      </div>
+    </div>
   </div>
 
-  <!-- Вкладка 2: Особистий Кабінет -->
+  <!-- Вкладка 2: Кабінет -->
   <div id="cabinet" class="tab">
     <h3>Авторизація сокланівця</h3>
-    <input type="text" id="user_card" placeholder="Введіть 6 цифр вашої картки">
-    <button class="submit-btn" onclick="loginUser()">Увійти в кабінет</button>
+    <div class="form-grid">
+      <div class="full-width">
+        <input type="text" id="user_card" placeholder="Введіть 6 цифр вашої картки">
+      </div>
+      <div class="full-width">
+        <button class="btn btn-green" onclick="loginUser()">Увійти в кабінет</button>
+      </div>
+    </div>
     
-    <div id="cabinet_info" class="card-box" style="display:none;"></div>
+    <div id="cabinet_info" class="stats-card" style="display:none;">
+      <div class="stat-item"><span class="stat-label">Нікнейм</span><span class="stat-value" id="res_nick">-</span></div>
+      <div class="stat-item"><span class="stat-label">Ранг</span><span class="stat-value" id="res_rank">-</span></div>
+      <div class="stat-item"><span class="stat-label">Баланс</span><span class="stat-value" id="res_balance">-</span></div>
+      <div class="stat-item"><span class="stat-label">Штрафи / Догани</span><span class="stat-value" id="res_reprimands">-</span></div>
+    </div>
   </div>
 
-  <!-- Вкладка 3: Панель Керівництва -->
+  <!-- Вкладка 3: Керівництво -->
   <div id="admin" class="tab">
     <div id="admin_login_box">
-      <h3>Вхід для Модераторів</h3>
-      <input type="password" id="admin_pin" placeholder="Введіть 7-значний PIN">
-      <button class="submit-btn" onclick="adminLogin()">Увійти</button>
+      <h3>Вхід для Керівництва</h3>
+      <div class="form-grid">
+        <div class="full-width">
+          <input type="password" id="admin_pin" placeholder="Введіть PIN-код">
+        </div>
+        <div class="full-width">
+          <button class="btn btn-green" onclick="adminLogin()">Авторизуватись</button>
+        </div>
+      </div>
     </div>
 
     <div id="admin_panel" style="display:none;">
-      <h3>Вітаємо, <span id="admin_name_disp"></span>!</h3>
+      <h3>Вітаємо, <span id="admin_name_disp" style="color: var(--accent-blue);"></span>!</h3>
       
-      <h4>📦 Прийом продукції</h4>
-      <select id="prod_type"><option>Петрушка</option><option>Алкоголь</option></select>
-      <input type="text" id="prod_member_id" placeholder="ID сокланівця">
-      <input type="number" id="qty1" placeholder="1⭐ Кількість">
-      <input type="number" id="qty2" placeholder="2⭐ Кількість">
-      <input type="number" id="qty3" placeholder="3⭐ Кількість">
-      <button class="submit-btn" onclick="sendProduct()">Прийняти товар</button>
+      <h3 style="margin-top:20px; font-size:15px; color:var(--text-muted);">📦 Прийом продукції</h3>
+      <div class="form-grid">
+        <select id="prod_type" class="full-width"><option>Петрушка</option><option>Алкоголь</option></select>
+        <input type="text" id="prod_member_id" placeholder="ID сокланівця" class="full-width">
+        <input type="number" id="qty1" placeholder="1⭐ Кількість">
+        <input type="number" id="qty2" placeholder="2⭐ Кількість">
+        <input type="number" id="qty3" placeholder="3⭐ Кількість" class="full-width">
+        <div class="full-width">
+          <button class="btn btn-green" onclick="sendProduct()">Прийняти товар</button>
+        </div>
+      </div>
 
-      <hr style="border-color:#444; margin:20px 0;">
+      <hr style="border:none; border-top:1px solid var(--border-color); margin:24px 0;">
 
-      <h4>🔫 Видача зброї сокланівцю</h4>
-      <input type="text" id="w_nick" placeholder="Нікнейм сокланівця">
-      <select id="w_rank">
-        <option>Молодший</option><option>Місцевий</option>
-        <option>Старший</option><option>Модератор</option><option>Лідер</option>
-      </select>
-      <input type="number" id="w_m4" placeholder="Кількість M4 (або 0 за нормою)">
-      <input type="number" id="w_armor" placeholder="Кількість Броні (або 0 за нормою)">
-      <button class="submit-btn" style="background:#dc3545;" onclick="giveWeapon()">Видати зі списанням зі складу</button>
+      <h3 style="font-size:15px; color:var(--text-muted);">🔫 Видача зброї зі списанням</h3>
+      <div class="form-grid">
+        <input type="text" id="w_nick" placeholder="Нікнейм сокланівця">
+        <select id="w_rank">
+          <option>Молодший</option><option>Місцевий</option>
+          <option>Старший</option><option>Модератор</option><option>Лідер</option>
+        </select>
+        <input type="number" id="w_m4" placeholder="M4 (0 за нормою)">
+        <input type="number" id="w_armor" placeholder="Броня (0 за нормою)">
+        <div class="full-width">
+          <button class="btn btn-red" onclick="giveWeapon()">Видати зі списанням</button>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 
 <script>
-  // ЗАМІНІТЬ ЦЕ ПОСИЛАННЯ НА ВАШ URL З GOOGLE APPS SCRIPT
   const API_URL = "https://script.google.com/macros/s/AKfycbwLy-MSdOMQnNV2g8jSd65yhdFYc05nFJa4RboxHp4ipn023LQBgkTdvS8eLDakIdhU/exec"; 
   let currentAdmin = "";
 
-  function switchTab(tabId) {
+  function switchTab(tabId, e) {
     document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
     document.querySelectorAll('.nav button').forEach(b => b.classList.remove('active'));
     document.getElementById(tabId).classList.add('active');
-    event.target.classList.add('active');
+    e.target.classList.add('active');
   }
 
   async function apiCall(data) {
@@ -125,9 +327,11 @@
     const card = document.getElementById('user_card').value;
     const res = await apiCall({ action: "get_member_cabinet", card: card });
     if(res.success) {
-      const box = document.getElementById('cabinet_info');
-      box.style.display = "block";
-      box.innerHTML = `<b>Нік:</b> ${res.data.nick}<br><b>Ранг:</b> ${res.data.rank}<br><b>Баланс:</b> ${res.data.balance} грн.<br><b>Штрафи/Догани:</b> ${res.data.reprimands}`;
+      document.getElementById('cabinet_info').style.display = "grid";
+      document.getElementById('res_nick').innerText = res.data.nick;
+      document.getElementById('res_rank').innerText = res.data.rank;
+      document.getElementById('res_balance').innerText = res.data.balance + " грн.";
+      document.getElementById('res_reprimands').innerText = res.data.reprimands;
     } else {
       alert(res.message);
     }
