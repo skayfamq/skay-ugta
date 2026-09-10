@@ -260,7 +260,7 @@
     <div id="cab_auth_form" class="section-box">
       <h3>🔑 Авторизація учасника</h3>
       <input type="text" id="user_card" placeholder="Введіть останні 6 цифр вашої картки">
-      <button class="btn-main btn-blue" style="margin-top:10px;" onclick="loginUser()">Увійти</button>
+      <button class="btn-main btn-blue" style="margin-top:10px;" id="login_btn" onclick="loginUser()">Увійти</button>
     </div>
 
     <div id="cab_menu" class="section-box" style="display:none;">
@@ -359,9 +359,21 @@
     document.getElementById(tabId).style.display = 'block';
   }
 
+  // Оновлена функція запитів без проблем з CORS
   async function apiCall(data) {
-    const res = await fetch(API_URL, { method: 'POST', body: JSON.stringify(data) });
-    return await res.json();
+    try {
+      const response = await fetch(API_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'text/plain;charset=utf-8',
+        },
+        body: JSON.stringify(data)
+      });
+      return await response.json();
+    } catch (e) {
+      console.error("API Error:", e);
+      return { success: false, message: "Помилка з'єднання з сервером." };
+    }
   }
 
   async function checkBirthdays() {
@@ -393,22 +405,30 @@
       inviter: document.getElementById('app_inviter').value,
     };
     const res = await apiCall(payload);
-    alert(res.message);
+    alert(res.message || "Заявку відправлено!");
   }
 
   async function loginUser() {
-    const card = document.getElementById('user_card').value;
-    if(!card) return alert("Введіть 6 цифр картки!");
+    const cardInput = document.getElementById('user_card').value.trim();
+    const btn = document.getElementById('login_btn');
+    if(!cardInput) return alert("Введіть 6 цифр картки!");
 
-    const res = await apiCall({ action: "get_member_cabinet", card: card });
-    if(res.success) {
+    btn.innerText = "Перевірка...";
+    btn.disabled = true;
+
+    const res = await apiCall({ action: "get_member_cabinet", card: cardInput });
+    
+    btn.innerText = "Увійти";
+    btn.disabled = false;
+
+    if(res.success && res.data) {
       document.getElementById('cab_auth_form').style.display = "none";
       document.getElementById('cab_menu').style.display = "block";
       
-      document.getElementById('res_nick').innerText = res.data.nick;
-      document.getElementById('res_rank').innerText = res.data.rank;
-      document.getElementById('res_balance').innerText = res.data.balance + " грн.";
-      document.getElementById('res_reprimands').innerText = res.data.reprimands;
+      document.getElementById('res_nick').innerText = res.data.nick || "-";
+      document.getElementById('res_rank').innerText = res.data.rank || "-";
+      document.getElementById('res_balance').innerText = (res.data.balance || 0) + " грн.";
+      document.getElementById('res_reprimands').innerText = res.data.reprimands || "0/3";
 
       if(res.data.reports && res.data.reports.length > 0) {
         document.getElementById('res_monthly_report').innerHTML = res.data.reports
@@ -428,7 +448,7 @@
     const factory = document.getElementById('factory_type').value;
     const nick = document.getElementById('res_nick').innerText;
     const res = await apiCall({ action: "book_factory", nick: nick, factory: factory });
-    alert(res.message);
+    alert(res.message || "Цех успішно заброньовано!");
   }
 
   async function adminLogin() {
@@ -440,7 +460,7 @@
       document.getElementById('admin_panel').style.display = "block";
       document.getElementById('admin_name_disp').innerText = currentAdmin;
     } else {
-      alert(res.message);
+      alert(res.message || "Невірний PIN-код!");
     }
   }
 
