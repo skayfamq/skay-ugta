@@ -42,22 +42,32 @@
       border-radius: 20px;
       padding: 28px;
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     .avatar-wrap {
-      width: 96px; height: 96px; border-radius: 50%;
-      background: #0d1017; border: 2px solid var(--accent-blue);
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      background: #0d1017;
+      border: 2px solid var(--accent-blue);
       box-shadow: 0 0 20px rgba(59, 130, 246, 0.35);
-      margin: 0 auto 12px; overflow: hidden;
-      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 12px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     .avatar-wrap img { width: 100%; height: 100%; object-fit: cover; }
 
     .portal-header { text-align: center; margin-bottom: 22px; }
-    .portal-header h1 { font-size: 24px; font-weight: 800; }
+    .portal-header h1 { font-size: 24px; font-weight: 800; letter-spacing: 0.5px; }
     .portal-header p { font-size: 13px; color: var(--text-sub); margin-top: 4px; }
 
     .section-box {
+      width: 100%;
       background: var(--inner-card);
       border: 1px solid var(--border-color);
       border-radius: 14px;
@@ -66,57 +76,115 @@
     }
 
     .section-box h3 {
-      font-size: 12px; font-weight: 700; color: var(--accent-blue);
-      text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 12px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--accent-blue);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 10px;
     }
+
+    .section-box p { font-size: 13px; color: var(--text-sub); line-height: 1.5; }
 
     .bday-box {
       background: rgba(245, 158, 11, 0.1);
       border: 1px solid rgba(245, 158, 11, 0.3);
-      border-radius: 12px; padding: 12px; margin-bottom: 14px; text-align: center;
+      border-radius: 14px;
+      padding: 14px;
+      margin-bottom: 16px;
+      width: 100%;
+      text-align: center;
     }
-    .bday-box h4 { color: var(--accent-gold); font-size: 13px; font-weight: 700; }
-    .bday-box p { color: #fff; font-size: 12px; margin-top: 2px; }
+
+    .bday-box h4 { color: var(--accent-gold); font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+    .bday-box p { color: #fff; font-size: 13px; }
+
+    .leaders-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .leader-item { background: rgba(0, 0, 0, 0.25); border: 1px solid var(--border-color); border-radius: 10px; padding: 10px 12px; }
+    .leader-name { font-size: 13px; font-weight: 700; color: #fff; }
+    .leader-role { font-size: 12px; color: var(--accent-blue); margin-top: 2px; }
 
     .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
     .info-card {
       background: rgba(0, 0, 0, 0.25);
       border: 1px solid var(--border-color);
-      border-radius: 10px; padding: 10px 12px;
+      border-radius: 10px;
+      padding: 10px 12px;
     }
     .info-label { font-size: 11px; color: var(--text-sub); text-transform: uppercase; }
     .info-value { font-size: 15px; font-weight: 700; color: #fff; margin-top: 2px; }
 
-    .menu-buttons { display: flex; flex-direction: column; gap: 10px; }
+    .menu-buttons { width: 100%; display: flex; flex-direction: column; gap: 10px; }
+
     .btn-main {
-      width: 100%; padding: 13px; border: none; border-radius: 10px;
-      font-size: 14px; font-weight: 600; cursor: pointer;
-      display: flex; align-items: center; justify-content: center; gap: 8px;
-      transition: all 0.2s;
+      width: 100%;
+      padding: 13px;
+      border: none;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s ease;
     }
+
     .btn-blue { background: var(--accent-blue); color: #fff; }
     .btn-blue:hover { background: var(--accent-blue-hover); }
+
     .btn-dark { background: var(--accent-dark); color: #fff; border: 1px solid var(--border-color); }
     .btn-dark:hover { background: #283548; }
 
-    .view-screen { display: none; }
+    .btn-red-dark { background: var(--accent-red-dark); color: var(--accent-red-text); border: 1px solid rgba(248, 113, 113, 0.2); }
+    .btn-red-dark:hover { background: #3a2027; }
+
+    .view-screen { display: none; width: 100%; }
     .view-screen.active { display: block; }
 
     .back-btn {
-      background: transparent; border: none; color: var(--accent-blue);
-      font-weight: 600; font-size: 13px; cursor: pointer; margin-bottom: 16px;
+      background: transparent;
+      border: none;
+      color: var(--accent-blue);
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      margin-bottom: 16px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
     }
 
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .full-width { grid-column: span 2; }
+
     input, select {
-      width: 100%; padding: 11px; background: #0d1017;
-      border: 1px solid var(--border-color); border-radius: 8px;
-      color: #fff; font-size: 13px; outline: none; margin-bottom: 10px;
+      width: 100%;
+      padding: 10px 12px;
+      background: #0d1017;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      color: #fff;
+      font-size: 13px;
+      outline: none;
     }
 
     .timer-display {
-      font-size: 20px; font-weight: 800; color: var(--accent-green);
-      text-align: center; margin: 10px 0; background: rgba(34, 197, 94, 0.1);
-      padding: 10px; border-radius: 8px; border: 1px dashed var(--accent-green);
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--accent-green);
+      text-align: center;
+      margin: 12px 0;
+      background: rgba(34, 197, 94, 0.1);
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px dashed var(--accent-green);
+    }
+
+    @media (max-width: 520px) {
+      .form-grid { grid-template-columns: 1fr; }
+      .full-width { grid-column: span 1; }
     }
   </style>
 </head>
@@ -124,36 +192,106 @@
 
 <div class="portal-card">
 
+  <!-- СТАРТОВИЙ ЕКРАН ПРИВІТАННЯ -->
+  <div id="welcome_view" class="view-screen active" style="text-align: center;">
+    <h1 style="font-size: 26px; font-weight: 800; color: #3b82f6; margin-bottom: 12px;">SKAY CLAN</h1>
+    <p style="font-size: 14px; color: #fff; margin-bottom: 8px;">Вітаємо у офіційному додатку клану!</p>
+    <p style="font-size: 13px; color: var(--text-sub); margin-bottom: 24px; line-height: 1.4;">
+      Ця платформа працює як повноцінний PWA-додаток на твоєму пристрої.
+    </p>
+    <button class="btn-main btn-blue" onclick="openView('home_view')">Увійти / Меню</button>
+  </div>
+
   <!-- ГОЛОВНЕ МЕНЮ -->
-  <div id="home_view" class="view-screen active">
-    <div class="avatar-wrap"><img src="icon.png" alt="SKAY"></div>
-    <div class="portal-header">
-      <h1>SKAY CLAN</h1>
-      <p>Офіційний портал клану UKRAINE GTA</p>
+  <div id="home_view" class="view-screen">
+    <div style="display: flex; flex-direction: column; align-items: center;">
+      <div class="avatar-wrap">
+        <img src="icon.png" alt="SKAY Logo">
+      </div>
+      <div class="portal-header">
+        <h1>SKAY CLAN</h1>
+        <p>Офіційний портал клану UKRAINE GTA</p>
+      </div>
     </div>
+
+    <!-- Блок Днів Народження -->
+    <div id="bday_container" class="bday-box" style="display: none;">
+      <h4>🎉 СЬОГОДНІ СВЯТКУЮТЬ ДЕНЬ НАРОДЖЕННЯ!</h4>
+      <p id="bday_text"></p>
+    </div>
+
+    <div class="section-box">
+      <h3>ПРО НАШ КЛАН</h3>
+      <p>SKAY — це топовий та згуртований клан. Ми займаємося активним розвитком підприємств, вирощуванням ресурсів, виготовленням зброї та RP-життям.</p>
+    </div>
+
+    <div class="section-box">
+      <h3>КЕРІВНИЦТВО КЛАНУ</h3>
+      <div class="leaders-grid">
+        <div class="leader-item">
+          <div class="leader-name">Алекс Фома</div>
+          <div class="leader-role">Лідер клану</div>
+        </div>
+        <div class="leader-item">
+          <div class="leader-name">Дініс Мельник</div>
+          <div class="leader-role">Модератор</div>
+        </div>
+        <div class="leader-item">
+          <div class="leader-name">Петро Пишняк</div>
+          <div class="leader-role">Модератор</div>
+        </div>
+        <div class="leader-item">
+          <div class="leader-name">-</div>
+          <div class="leader-role">Модератор</div>
+        </div>
+      </div>
+    </div>
+
     <div class="menu-buttons">
-      <button class="btn-main btn-blue" onclick="openView('cabinet_auth_view')">🔑 Вхід в кабінет</button>
-      <button class="btn-main btn-dark" onclick="openView('admin_auth_view')">👑 Кабінет керівництва</button>
+      <button class="btn-main btn-blue" onclick="openView('apply_view')">📝 Подати заявку в клан</button>
+      <button class="btn-main btn-dark" onclick="openView('cabinet_auth_view')">🔑 Авторизація в Мій кабінет</button>
+      <button class="btn-main btn-red-dark" onclick="openView('admin_view')">👑 Кабінет керівництва</button>
+    </div>
+  </div>
+
+  <!-- ФОРМА ЗАЯВКИ -->
+  <div id="apply_view" class="view-screen">
+    <button class="back-btn" onclick="openView('home_view')">← Повернутися назад</button>
+    <div class="section-box">
+      <h3>ПОДАТИ ЗАЯВКУ НА ВСТУП</h3>
+      <div class="form-grid">
+        <input type="text" id="app_nick" placeholder="Ігровий Нікнейм">
+        <input type="text" id="app_bday" placeholder="День народження (ДД.ММ)">
+        <input type="text" id="app_card" placeholder="Останні 6 цифр картки">
+        <input type="text" id="app_id" placeholder="Ігровий ID">
+        <input type="text" id="app_discord" placeholder="Discord User/ID">
+        <input type="number" id="app_age" placeholder="Ваш вік">
+        <input type="text" id="app_time" placeholder="Онлайн у грі (год)">
+        <input type="number" id="app_rp" placeholder="Знання РП (1-10)">
+        <input type="text" id="app_m4" placeholder="Прокачка M4A4 (%)">
+        <input type="text" id="app_inviter" placeholder="Хто запросив">
+      </div>
+      <button class="btn-main btn-blue" style="margin-top:14px;" onclick="submitApplication()">Надіслати заявку</button>
     </div>
   </div>
 
   <!-- ВХІД В КАБІНЕТ -->
   <div id="cabinet_auth_view" class="view-screen">
-    <button class="back-btn" onclick="openView('home_view')">← Назад</button>
+    <button class="back-btn" onclick="openView('home_view')">← Повернутися назад</button>
     <div class="section-box">
       <h3>🔑 Авторизація учасника</h3>
-      <input type="text" id="user_card" placeholder="Введіть 6 цифр картки">
-      <button class="btn-main btn-blue" id="login_btn" onclick="loginUser()">Увійти</button>
+      <input type="text" id="user_card" placeholder="Введіть останні 6 цифр вашої картки">
+      <button class="btn-main btn-blue" style="margin-top:10px;" id="login_btn" onclick="loginUser()">Увійти</button>
     </div>
   </div>
 
   <!-- ОСОБИСТИЙ КАБІНЕТ -->
   <div id="cabinet_view" class="view-screen">
     <button class="back-btn" onclick="openView('home_view')">← Вийти з кабінету</button>
-    
+
     <div class="section-box" style="border-color: rgba(34, 197, 94, 0.4);">
       <h3 style="color: var(--accent-green);">🎉 Успішна авторизація!</h3>
-      <p style="font-size: 14px; color: #fff;">Вітаємо в системі, <b id="res_nick">---</b>!</p>
+      <p style="font-size: 14px; color: #fff;">Вітаємо в кабінеті, <b id="res_nick">---</b>!</p>
     </div>
 
     <div id="cab_bday_box" class="bday-box" style="display:none;">
@@ -161,14 +299,14 @@
       <p id="cab_bday_text">-</p>
     </div>
 
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 14px;">
+    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:8px; margin-bottom:14px;">
       <button class="btn-main btn-dark" onclick="showCabTab('tab_info')">👤 Моя інформація</button>
       <button class="btn-main btn-dark" onclick="showCabTab('tab_factory')">🏭 Бронювання цеху</button>
     </div>
 
     <!-- ТАБ: ІНФОРМАЦІЯ -->
     <div id="tab_info" class="section-box cab-tab">
-      <h3>👤 ПРОФІЛЬ СОКЛАНІВЦЯ</h3>
+      <h3>👤 ІНФОРМАЦІЯ ПРО СОКЛАНІВЦЯ</h3>
       <div class="info-grid">
         <div class="info-card">
           <div class="info-label">Ранг</div>
@@ -189,31 +327,75 @@
       </div>
     </div>
 
-    <!-- ТАБ: БРОНЮВАННЯ -->
+    <!-- ТАБ: БРОНЮВАННЯ ЦЕХУ -->
     <div id="tab_factory" class="section-box cab-tab" style="display:none;">
       <h3>🏭 БРОНЮВАННЯ ЦЕХУ</h3>
       <div id="booking_form_block">
-        <select id="factory_type">
+        <p style="margin-bottom:10px; color: var(--text-sub);">Оберіть цех для бронювання на 1 годину:</p>
+        <select id="factory_type" style="margin-bottom:12px;">
           <option>Цех №1 (Петрушка)</option>
           <option>Цех №2 (Алкоголь)</option>
           <option>Цех №3 (Зброя)</option>
         </select>
-        <button class="btn-main btn-blue" id="book_btn" onclick="startBooking()">Забронювати на 1 годину</button>
+        <button class="btn-main btn-blue" id="book_btn" onclick="startBooking()">Забронювати цех</button>
       </div>
 
       <div id="timer_block" style="display:none;">
-        <p style="font-size: 13px; color: var(--text-sub); text-align: center;">Цех успішно заброньовано! Залишилося часу:</p>
+        <p style="font-size: 13px; color: var(--text-sub); text-align: center;">Цех заброньовано! Зворотний відлік:</p>
         <div class="timer-display" id="timer_count">60:00</div>
       </div>
     </div>
+  </div>
 
+  <!-- КАБІНЕТ КЕРІВНИЦТВА -->
+  <div id="admin_view" class="view-screen">
+    <button class="back-btn" onclick="openView('home_view')">← Повернутися назад</button>
+    
+    <div id="admin_login_box" class="section-box">
+      <h3>ВХІД ДЛЯ КЕРІВНИЦТВА</h3>
+      <input type="password" id="admin_pin" placeholder="Введіть PIN-код">
+      <button class="btn-main btn-blue" style="margin-top:8px;" onclick="adminLogin()">Авторизуватись</button>
+    </div>
+
+    <div id="admin_panel" style="display:none;">
+      <div class="section-box">
+        <h3>ПРИЙОМ ПРОДУКЦІЇ (<span id="admin_name_disp"></span>)</h3>
+        <select id="prod_type" style="margin-bottom:10px;"><option>Петрушка</option><option>Алкоголь</option></select>
+        <input type="text" id="prod_member_id" placeholder="ID сокланівця" style="margin-bottom:10px;">
+        <div class="form-grid">
+          <input type="number" id="qty1" placeholder="1⭐ Кількість">
+          <input type="number" id="qty2" placeholder="2⭐ Кількість">
+          <input type="number" id="qty3" placeholder="3⭐ Кількість" class="full-width">
+        </div>
+        <button class="btn-main btn-blue" style="margin-top:10px;" onclick="sendProduct()">Прийняти товар</button>
+      </div>
+
+      <div class="section-box">
+        <h3>ВИДАЧА ЗБРОЇ</h3>
+        <div class="form-grid">
+          <input type="text" id="w_nick" placeholder="Нікнейм сокланівця">
+          <select id="w_rank">
+            <option>Молодший</option><option>Місцевий</option>
+            <option>Старший</option><option>Модератор</option><option>Лідер</option>
+          </select>
+          <input type="number" id="w_m4" placeholder="M4 (0 за нормою)">
+          <input type="number" id="w_armor" placeholder="Броня (0 за нормою)">
+        </div>
+        <button class="btn-main btn-red-dark" style="margin-top:10px;" onclick="giveWeapon()">Видати зі списанням</button>
+      </div>
+    </div>
   </div>
 
 </div>
 
 <script>
-  const API_URL = "https://script.google.com/macros/s/AKfycbzeK8R8VQk9JOOsv71qsHZe85chJYhwOW6AKFGIuZwdB_zopb9WexEGTWqGN3Bc2oQ2/exec";
+  const API_URL = "https://script.google.com/macros/s/AKfycbzeK8R8VQk9JOOsv71qsHZe85chJYhwOW6AKFGIuZwdB_zopb9WexEGTWqGN3Bc2oQ2/exec"; 
+  let currentAdmin = "";
   let countdownInterval = null;
+
+  window.onload = function() {
+    checkBirthdays();
+  };
 
   function openView(viewId) {
     document.querySelectorAll('.view-screen').forEach(v => v.classList.remove('active'));
@@ -234,19 +416,53 @@
       });
       return await response.json();
     } catch (e) {
-      return { success: false, message: "Помилка з'єднання." };
+      console.error("API Error:", e);
+      return { success: false, message: "Помилка з'єднання з сервером." };
     }
   }
 
+  async function checkBirthdays() {
+    try {
+      const res = await apiCall({ action: "check_birthdays" });
+      if(res.success && res.birthdays && res.birthdays.length > 0) {
+        const count = res.birthdays.length;
+        const names = res.birthdays.join(", ");
+        document.getElementById('bday_text').innerText = `Сьогодні святкує ${count} чол.: ${names}`;
+        document.getElementById('bday_container').style.display = "block";
+      }
+    } catch(e) {
+      console.log("Помилка перевірки ДН", e);
+    }
+  }
+
+  async function submitApplication() {
+    const payload = {
+      action: "submit_application",
+      nick: document.getElementById('app_nick').value,
+      bday: document.getElementById('app_bday').value,
+      card: document.getElementById('app_card').value,
+      memberId: document.getElementById('app_id').value,
+      discord: document.getElementById('app_discord').value,
+      age: document.getElementById('app_age').value,
+      playTime: document.getElementById('app_time').value,
+      rpScore: document.getElementById('app_rp').value,
+      m4Skill: document.getElementById('app_m4').value,
+      inviter: document.getElementById('app_inviter').value,
+    };
+    const res = await apiCall(payload);
+    alert(res.message || "Заявку відправлено!");
+  }
+
   async function loginUser() {
-    const card = document.getElementById('user_card').value.trim();
+    const cardInput = document.getElementById('user_card').value.trim();
     const btn = document.getElementById('login_btn');
-    if(!card) return alert("Введіть номер картки!");
+    if(!cardInput) return alert("Введіть 6 цифр картки!");
 
     btn.innerText = "Авторизація...";
     btn.disabled = true;
 
-    const res = await apiCall({ action: "get_member_cabinet", card: card });
+    const res = await apiCall({ action: "get_member_cabinet", card: cardInput });
+    
     btn.innerText = "Увійти";
     btn.disabled = false;
 
@@ -258,13 +474,14 @@
       document.getElementById('res_reps').innerText = res.data.reprimands || "0";
       document.getElementById('res_balance').innerText = (res.data.balance || 0) + " грн";
 
-      // ДН у кабінеті
       if(res.birthdays && res.birthdays.length > 0) {
         document.getElementById('cab_bday_text').innerText = res.birthdays.join(", ");
         document.getElementById('cab_bday_box').style.display = "block";
       }
+
+      showCabTab('tab_info');
     } else {
-      alert(res.message || "Помилка авторизації!");
+      alert(res.message || "Картку не знайдено!");
     }
   }
 
@@ -274,17 +491,17 @@
     const btn = document.getElementById('book_btn');
 
     btn.disabled = true;
-    btn.innerText = "Запис...";
+    btn.innerText = "Запис у таблицю...";
 
     const res = await apiCall({ action: "book_factory", nick: nick, factory: factory });
     
     btn.disabled = false;
-    btn.innerText = "Забронювати на 1 годину";
+    btn.innerText = "Забронювати цех";
 
     if(res.success) {
       document.getElementById('booking_form_block').style.display = 'none';
       document.getElementById('timer_block').style.display = 'block';
-      runTimer(3600); // 1 година в секундах
+      runTimer(3600);
     } else {
       alert(res.message || "Помилка бронювання!");
     }
@@ -304,10 +521,48 @@
         clearInterval(countdownInterval);
         document.getElementById('timer_block').style.display = 'none';
         document.getElementById('booking_form_block').style.display = 'block';
-        alert("Час бронювання цеху вичерпано!");
+        alert("Час бронювання цеху закінчився!");
       }
       timeLeft--;
     }, 1000);
+  }
+
+  async function adminLogin() {
+    const pin = document.getElementById('admin_pin').value;
+    const res = await apiCall({ action: "admin_login", pin: pin });
+    if(res.success) {
+      currentAdmin = res.adminName;
+      document.getElementById('admin_login_box').style.display = "none";
+      document.getElementById('admin_panel').style.display = "block";
+      document.getElementById('admin_name_disp').innerText = currentAdmin;
+    } else {
+      alert(res.message || "Невірний PIN-код!");
+    }
+  }
+
+  async function sendProduct() {
+    const res = await apiCall({
+      action: "receive_product",
+      adminName: currentAdmin,
+      product: document.getElementById('prod_type').value,
+      memberId: document.getElementById('prod_member_id').value,
+      qty1: document.getElementById('qty1').value,
+      qty2: document.getElementById('qty2').value,
+      qty3: document.getElementById('qty3').value
+    });
+    alert(res.message);
+  }
+
+  async function giveWeapon() {
+    const res = await apiCall({
+      action: "give_weapon",
+      adminName: currentAdmin,
+      memberNick: document.getElementById('w_nick').value,
+      rank: document.getElementById('w_rank').value,
+      m4: document.getElementById('w_m4').value,
+      armor: document.getElementById('w_armor').value
+    });
+    alert(res.message);
   }
 </script>
 
